@@ -1,0 +1,88 @@
+.login__container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 5%;
+  left: 25%;
+  width: 50%;
+  height: 90%;
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+.login__form h2 {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: yellow;
+}
+
+.login--form__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+  background-color: khaki;
+}
+
+.login--form__name {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 30%;
+  background-color: aqua
+}
+
+.login--form__name label {
+  display: flex;
+  flex-direction: column;
+}
+
+.login--form__name span {
+  margin-top: 1rem;
+}
+
+.login--form__password {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 30%;
+  background-color: aqua
+}
+
+.login--form__password label {
+  display: flex;
+  flex-direction: column;
+}
+
+.login--form__password span {
+  margin-top: 1rem;
+}
+
+.login--form__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+  width: 100%;
+}
+
+.login--form__btn button {
+  background-color: transparent;
+  padding: .5rem 2rem;
+  letter-spacing: 1px;
+  border: 1px solid white;
+  border-radius: 3rem;
+  color: white;
+  cursor: pointer;
+
+}
