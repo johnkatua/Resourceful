@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const LoginPage = lazy(() => import("../pages/Login/LoginPage"));
 const Home = lazy(() => import("../pages/Home/index"));
+const ServicesPage = lazy(() => import("../pages/services/index.js"))
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,11 @@ const AppRoutes = () => {
               <LoginPage />
             </Suspense>
           } />
+          <Route path="services" element={
+            <Suspense fallback={<>Loading...</>}>
+              <ServicesPage />
+            </Suspense>
+          }></Route>
         </Routes>
       </Router>
     </div>
