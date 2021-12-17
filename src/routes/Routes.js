@@ -1,5 +1,7 @@
 import React, {lazy, Suspense} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AllServices from "../components/services/AllServices";
+import ServiceSubCategory from "../components/services/ServiceSubCategories";
 
 const LoginPage = lazy(() => import("../pages/Login/LoginPage"));
 const Home = lazy(() => import("../pages/Home/index"));
@@ -24,7 +26,10 @@ const AppRoutes = () => {
             <Suspense fallback={<>Loading...</>}>
               <ServicesPage />
             </Suspense>
-          }></Route>
+          }>
+            <Route path="" element={<AllServices />} />
+            <Route path=":categoryId" element={<ServiceSubCategory />} />
+          </Route>
         </Routes>
       </Router>
     </div>

@@ -1,0 +1,27 @@
+/* info */
+
+.info__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.1rem;
+  margin: 1rem 0 1rem 1rem;
+  color: white;
+  height: 2rem;
+}
+
+.info__container span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 20%;
+}
+
+.info__container p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+}

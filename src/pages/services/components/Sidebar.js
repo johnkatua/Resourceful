@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "../../styles/ServiceSidebar.css";
-// import LoadSubCategories from "../LoadSubCategories";
 import { BsStars } from "react-icons/bs";
+
+import LoadSubCategories from "../../../components/subcategories/LoadCategories";
 
 const Sidebar = () => {
   return (
@@ -15,7 +15,7 @@ const Sidebar = () => {
           <p>All</p>
         </Link>
       </div>
-      <div>A{/* <LoadSubCategories /> */}</div>
+      <div><LoadSubCategories /></div>
     </div>
   );
 };
