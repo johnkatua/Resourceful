@@ -154,3 +154,93 @@
   width: 100%;
   height: 100%;
 }
+
+/* Single Service */
+.singleservice__container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.singleservice__photo {
+  height: 30rem;
+  width: 40%;
+}
+
+.singleservice__content {
+  flex: 1;
+  background-color: rosybrown;
+  padding-left: 0.5rem;
+}
+
+.singleservice__name {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.singleservice__content p:last-of-type {
+  letter-spacing: 1px;
+  padding: 0.5rem 0;
+}
+
+.singleservice--user__details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  letter-spacing: 1px;
+  padding: 0.5rem 0;
+}
+
+.singleservice--user__details p:first-child {
+  width: 50%;
+}
+
+.singleservice--user__details p:last-of-type {
+  flex: 1;
+}
+
+.singleservice--contact__details {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+}
+
+.singleservice--contact__details p {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  letter-spacing: 1px;
+  height: 100%;
+  align-items: center;
+}
+
+.singleservice--contact__details button:first-of-type {
+  position: none;
+  background-color: transparent;
+  width: 25%;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  padding: .5rem 0;
+  cursor: pointer;
+  border-radius: 3rem;
+  letter-spacing: 1px;
+  outline: none;
+  border: 1px solid white;
+  color: white;
+}
+
+.singleservice--contact__details button:last-of-type {
+  background-color: transparent;
+  width: 25%;
+  padding: .5rem 0;
+  cursor: pointer;
+  border-radius: 3rem;
+  letter-spacing: 1px;
+  outline: none;
+  border: 1px solid white;
+  color: white;
+}

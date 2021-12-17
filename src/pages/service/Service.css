@@ -1,0 +1,32 @@
+/* Service */
+.myservice__container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(75, 44, 44);
+}
+
+.myservice__button {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  height: 5%;
+  width: 8%;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+}
+
+.myservice__content {
+  position: absolute;
+  background-color: rgb(190, 190, 64);
+  top: 15%;
+  left: 5%;
+  width: 90%;
+  height: 30rem;
+}
