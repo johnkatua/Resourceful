@@ -7,12 +7,12 @@ const Header = () => {
 
   const navigateToLogin = (e) => {
     e.preventDefault();
-    navigate("/login");
+    navigate("login");
   };
 
   const navigateToRegister = (e) => {
     e.preventDefault();
-    navigate("/register");
+    navigate("register");
   };
   return (
     <div className="header__container">

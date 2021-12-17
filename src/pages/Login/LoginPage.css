@@ -18,11 +18,10 @@
 }
 
 .login__form h2 {
-  margin: 1rem 0;
+  margin: .5rem 0 1rem 0;
   font-size: 1.2rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background-color: yellow;
 }
 
 .login--form__details {
@@ -31,42 +30,24 @@
   align-items: center;
   width: 60%;
   height: 100%;
-  background-color: khaki;
 }
 
-.login--form__name {
+.login--form__data {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 30%;
-  background-color: aqua
 }
 
-.login--form__name label {
+.login--form__data label {
   display: flex;
   flex-direction: column;
 }
 
-.login--form__name span {
+.login--form__data span {
   margin-top: 1rem;
 }
 
-.login--form__password {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 30%;
-  background-color: aqua
-}
-
-.login--form__password label {
-  display: flex;
-  flex-direction: column;
-}
-
-.login--form__password span {
-  margin-top: 1rem;
-}
 
 .login--form__btn {
   display: flex;
@@ -84,5 +65,18 @@
   border-radius: 3rem;
   color: white;
   cursor: pointer;
+}
 
+.login--form__details p {
+  display: flex;
+  flex-direction: row;
+}
+
+.login--form__details p a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  margin-left: .5rem;
 }
