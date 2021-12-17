@@ -96,6 +96,10 @@
   cursor: pointer;
 }
 
+.register--form__btn button:disabled {
+  cursor: not-allowed;
+}
+
 .register--form__details p {
   display: flex;
   flex-direction: row;

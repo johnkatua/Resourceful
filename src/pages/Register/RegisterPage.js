@@ -72,7 +72,7 @@ const RegisterPage = () => {
             </select>
           </div>
           <div className="register--form__btn">
-            <button>Submit</button>
+            <button type="submit" disabled={!formik.isValid}>Submit</button>
           </div>
           <p>
             Already have an account. Sign In Now!
