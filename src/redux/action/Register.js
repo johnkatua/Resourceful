@@ -1,16 +1,15 @@
 import { REGISTER_USER, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL } from "../types/Types";
 
-export const userRegister = (user) => {
+export const userRegister = () => {
   return {
     type: REGISTER_USER,
-    user,
   };
 };
 
-export const userRegisterSuccess = (message) => {
+export const userRegisterSuccess = (user) => {
   return {
     type: REGISTER_USER_SUCCESS,
-    message,
+    user
   };
 };
 

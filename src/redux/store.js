@@ -19,7 +19,7 @@ export default function configureStore() {
 
   const store = createStore(
     combineReducers({
-      registration: registerReducer,
+      register: registerReducer,
       login: loginReducer,
       subCategories: getAllSubCategoriesReducer,
       services: getServicesReducer,

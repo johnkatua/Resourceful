@@ -1,18 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 
 import "./RegisterPage.css";
-import { userRegister } from "../../redux/action/Register";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+import { userRegister, userRegisterFail, userRegisterSuccess } from "../../redux/action/Register";
+
+const signUpUrl = "http://localhost:5000/createAccount";
+
 
 const RegisterPage = () => {
+  const [success, setSuccess] = useState(false);
+  const [successNotification, setSuccessNotification] = useState("");
+  const [failNotification, setFailNotification] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const register = useSelector((state) => state.register);
+  console.log(register)
+
+  const signUp = (user, navigate) => {
+    return function (dispatch) {
+      dispatch(userRegister());
+      axios({
+        method: "POST",
+        url: signUpUrl,
+        data: user
+      })
+      .then((response) => {
+        console.log(response);
+        const { data } = response.data;
+        dispatch(userRegisterSuccess(data));
+        formik.resetForm();
+        setTimeout(() => {
+          setSuccessNotification(response.data.message);
+          navigate("/");
+        }, 3000);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(userRegisterFail(error));
+        formik.resetForm();
+        setTimeout(() => {
+          setFailNotification(error.response.data.message);
+          setSuccess(false);
+        }, 3000);
+      })
+    }
+  };
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -29,20 +68,17 @@ const RegisterPage = () => {
       account_type: Yup.string().required("* Account type is required"),
     }),
     onSubmit: (values) => {
-      try {
-        const { name, email, password, account_type } = values;
-        dispatch(userRegister({ name, email, password, account_type }))
-        navigate("/home");
-        formik.resetForm();
-      } catch (error) {
-        formik.resetForm();
-      }
+      const { name, email, password, account_type } = values;
+      dispatch(signUp({ name, email, password, account_type }, navigate));
     }
   });
+
+
   return (
     <div className="register__container">
       <div className="register__form">
         <h2>Sign Up</h2>
+        {success ? <p>{successNotification}</p> : <p>{failNotification}</p>}
         <form className="register--form__details" onSubmit={formik.handleSubmit}>
           <div className="register--form__data">
             <label>

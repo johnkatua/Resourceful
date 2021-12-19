@@ -8,10 +8,11 @@ export const registerReducer = (state = { user: {} }, action) => {
         loading: true,
       };
     case REGISTER_USER_SUCCESS:
+      console.log(action)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
       return {
         ...state,
         loading: false,
-        registerMessage: action.message,
+        user: action.user,
       };
     case REGISTER_USER_FAIL:
       return {

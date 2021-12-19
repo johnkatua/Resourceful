@@ -49,6 +49,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   margin-top: 0.7rem;
+  color: red;
 }
 
 .register__account {
