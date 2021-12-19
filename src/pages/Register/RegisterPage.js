@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +38,7 @@ const RegisterPage = () => {
         formik.resetForm();
         setTimeout(() => {
           setSuccessNotification(response.data.message);
-          navigate("/");
+          navigate("/login");
         }, 3000);
       })
       .catch((error) => {
@@ -83,14 +83,14 @@ const RegisterPage = () => {
           <div className="register--form__data">
             <label>
               Name:
-              <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} />
+              <input type="text" name="name" value={formik.values.name} onChange={formik.handleChange} autoComplete="off" />
             </label>
             <span>{formik.errors.name}</span>
           </div>
           <div className="register--form__data">
             <label>
               Email:
-              <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} />
+              <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} autoComplete="off" />
             </label>
             <span>{formik.errors.email}</span>
           </div>

@@ -2,16 +2,49 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { userLogin } from "../../redux/action/Login";
+import { userLogin, userLoginFail, userLoginSuccess } from "../../redux/action/Login";
 import "./LoginPage.css";
+import axios from "axios";
+
+const signInUrl = "http://localhost:5000/login";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const login = useSelector((state) => state.login);
+  console.log(login);
+
+  const signIn = (user, navigate) => {
+    console.log(user);
+    return function (dispatch) {
+      dispatch(userLogin());
+      axios({
+        method: "POST",
+        url: signInUrl,
+        data: user,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("TOKEN")}`
+        }
+      })
+      .then((response) => {
+        console.log(response);
+        const { token } = response.data;
+        localStorage.setItem("TOKEN", token);
+        dispatch(userLoginSuccess(token));
+        formik.resetForm();
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      })
+      .catch((error) => {
+        dispatch(userLoginFail(error));
+      })
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -25,14 +58,8 @@ const LoginPage = () => {
         .min(6, "Password is too short - minimum should be 6 characters"),
     }),
     onSubmit: (values) => {
-      try {
-        const { email, password } = values;
-        dispatch(userLogin({ email, password}));
-        navigate("/home");
-        formik.resetForm();
-      } catch (error) {
-        formik.resetForm();
-      }
+       const { email, password } = values;
+       dispatch(signIn({ email, password }, navigate));
     }
   });
   return (
@@ -43,19 +70,33 @@ const LoginPage = () => {
           <div className="login--form__data">
             <label>
               Name:
-              <input type="email" name="email" value={formik.values.email} onChange={formik.handleChange} />
+              <input
+                type="email"
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                autoComplete="off"
+              />
             </label>
             <span>{formik.errors.email}</span>
           </div>
           <div className="login--form__data">
             <label>
               Password:
-              <input type="password" name="password" value={formik.values.password} onChange={formik.handleChange} />
+              <input
+                type="password"
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                autoComplete="off"
+              />
             </label>
             <span>{formik.errors.password}</span>
           </div>
           <div className="login--form__btn">
-            <button type="submit" disabled={!formik.isValid}>Submit</button>
+            <button type="submit" disabled={!formik.isValid}>
+              Submit
+            </button>
           </div>
           <p>
             I do not have an account. Sign Up Now!
