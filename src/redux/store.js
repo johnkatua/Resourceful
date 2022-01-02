@@ -14,11 +14,24 @@ import {
   getSingleServiceReducer,
 } from "./reducers/ServicesReducer";
 
-export default function configureStore() {
+import authentication from "../redux/reducers/AuthenticationReducer";
+
+const initState = {
+  authentication: {
+    currentUser: null,
+    token: "",
+    error: "",
+    loading: false,
+    isAuthenticated: localStorage.getItem("TOKEN") ? true :  false,
+  }
+}
+
+export default function configureStore(initialState = initState) {
   const sagaMiddleware = createSagaMiddleware();
 
   const store = createStore(
     combineReducers({
+      authentication,
       register: registerReducer,
       login: loginReducer,
       subCategories: getAllSubCategoriesReducer,
@@ -26,6 +39,7 @@ export default function configureStore() {
       serviceBySubcategories: getServicesBySubcategoryReducer,
       service: getSingleServiceReducer,
     }),
+    initialState,
     composeWithDevTools(applyMiddleware(sagaMiddleware, thunk, logger))
   );
   sagaMiddleware.run(rootSaga);
