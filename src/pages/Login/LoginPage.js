@@ -6,47 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-// import { userLogin, userLoginFail, userLoginSuccess } from "../../redux/action/Login";
 import "./LoginPage.css";
-// import axios from "axios";
-
 import { signIn } from "../../redux/action/Authentication";
 
-// const signInUrl = "http://localhost:5000/login";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.authentication);
   console.log(currentUser);
-
-  // const signIn = (user, navigate) => {
-  //   console.log(user);
-  //   return function (dispatch) {
-  //     dispatch(userLogin());
-  //     axios({
-  //       method: "POST",
-  //       url: signInUrl,
-  //       data: user,
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("TOKEN")}`
-  //       }
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //       const { token } = response.data;
-  //       localStorage.setItem("TOKEN", token);
-  //       dispatch(userLoginSuccess(response.data));
-  //       formik.resetForm();
-  //       setTimeout(() => {
-  //         navigate("/");
-  //       }, 3000);
-  //     })
-  //     .catch((error) => {
-  //       dispatch(userLoginFail(error));
-  //     })
-  //   }
-  // }
 
   const formik = useFormik({
     initialValues: {

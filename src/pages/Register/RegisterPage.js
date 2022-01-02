@@ -5,15 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./RegisterPage.css";
-import { userRegister, userRegisterFail, userRegisterSuccess } from "../../redux/action/Register";
 import { signUp } from "../../redux/action/Authentication";
 
-const signUpUrl = "http://localhost:5000/createAccount";
 
 const RegisterPage = () => {
   const [success, setSuccess] = useState(true);
@@ -41,34 +38,6 @@ const RegisterPage = () => {
     // });
   };
 
-  // const signUp = (user, navigate) => {
-  //   return function (dispatch) {
-  //     dispatch(userRegister());
-  //     axios({
-  //       method: "POST",
-  //       url: signUpUrl,
-  //       data: user,
-  //     })
-  //       .then((response) => {
-  //         console.log(response);
-  //         const { data } = response.data;
-  //         dispatch(userRegisterSuccess(data));
-  //         setSuccess(true);
-  //         formik.resetForm();
-  //         setTimeout(() => {
-  //           navigate("/login");
-  //         }, 3000);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         dispatch(userRegisterFail(error));
-  //         setSuccess(!success);
-  //         formik.resetForm();
-  //         // setTimeout(() => {
-  //         // }, 3000);
-  //       });
-  //   };
-  // };
   const formik = useFormik({
     initialValues: {
       name: "",
