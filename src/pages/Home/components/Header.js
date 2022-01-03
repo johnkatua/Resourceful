@@ -1,14 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Dropdown } from "react-bootstrap";
 
 import { signOut } from "../../../redux/action/Authentication";
+
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.authentication);
-  console.log(currentUser)
+  console.log(currentUser);
+
 
   const navigateToLogin = (e) => {
     e.preventDefault();
@@ -20,9 +23,15 @@ const Header = () => {
     navigate("register");
   };
 
+  const navigateToProfile = (e) => {
+    e.preventDefault();
+    navigate("profile");
+  }
+
   const handleSignOut = () => {
     dispatch(signOut());
-  }
+  };
+  
   return (
     <div className="header__container">
       <div className="header__title">
@@ -34,13 +43,27 @@ const Header = () => {
         <div className="header__auth">
           {currentUser !== null ? (
             <div className="header--auth__details">
-              <p>{currentUser}</p>
-              <button className="header--auth__btn" onClick={handleSignOut}>SignOut</button>
+              <Dropdown>
+                <Dropdown.Toggle variant="light" id="dropdown-basic">
+                  {currentUser}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={navigateToProfile}>Your Dashboard</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <button className="header--auth__btn" onClick={handleSignOut}>
+                SignOut
+              </button>
             </div>
           ) : (
             <>
-              <button className="header--auth__signIn" onClick={navigateToLogin}>Sign In</button>
-              <button className="header--auth__signUp" onClick={navigateToRegister}>Sign Up</button>
+              <button className="header--auth__signIn" onClick={navigateToLogin}>
+                Sign In
+              </button>
+              <button className="header--auth__signUp" onClick={navigateToRegister}>
+                Sign Up
+              </button>
             </>
           )}
         </div>

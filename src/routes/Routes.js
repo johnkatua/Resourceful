@@ -8,7 +8,8 @@ const LoginPage = lazy(() => import("../pages/Login/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/Register/RegisterPage"));
 const Home = lazy(() => import("../pages/Home/index"));
 const ServicesPage = lazy(() => import("../pages/services/index.js"));
-const ServicePage = lazy(() => import("../pages/service/components/ServicePage"))
+const ServicePage = lazy(() => import("../pages/service/components/ServicePage"));
+const Profile = lazy(() => import("../pages/Profile/index"));
 
 
 const AppRoutes = () => {
@@ -37,6 +38,14 @@ const AppRoutes = () => {
             element={
               <Suspense fallback={<>Loading...</>}>
                 <RegisterPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <Suspense fallback={<>Loading...</>}>
+                <Profile />
               </Suspense>
             }
           />
