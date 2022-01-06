@@ -92,10 +92,10 @@ export const signIn = (payload, navigate) => {
     })
     .then((response) => {
       console.log(response);
-      const { token, name } = response.data;
-      localStorage.setItem("DATA", name);
+      const { token, user } = response.data.data;
+      localStorage.setItem("DATA", user.name);
       localStorage.setItem("TOKEN", token);
-      dispatch(userLoginSuccess(name));
+      dispatch(userLoginSuccess(user.name));
       navigate("/")
     })
     .catch((error) => {
