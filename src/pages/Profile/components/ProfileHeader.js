@@ -6,6 +6,7 @@ import { Dropdown } from "react-bootstrap"
 const ProfileHeader = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector(state => state.authentication);
+  console.log(currentUser);
 
   const navigateToHome = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const ProfileHeader = () => {
       <h2>Resourceful</h2>
       <Dropdown>
         <Dropdown.Toggle variant="light" id="dropdown-basic">
-          {currentUser}
+          {currentUser.name}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

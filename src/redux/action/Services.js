@@ -8,6 +8,9 @@ import {
   GET_SINGLE_SERVICE,
   GET_SINGLE_SERVICE_SUCCESS,
   GET_SINGLE_SERVICE_FAIL,
+  GET_SERVICE_BY_ACCOUNT,
+  GET_SERVICE_BY_ACCOUNT_FAIL,
+  GET_SERVICE_BY_ACCOUNT_SUCCESS,
 } from "../types/Types";
 
 // get single service
@@ -70,3 +73,27 @@ export const getServicesBySubcategoryFail = (error) => {
     error,
   };
 };
+
+// get services by acccount
+export const getServicesByAccount = (id) => {
+  console.log("id", id);
+  return {
+    type: GET_SERVICE_BY_ACCOUNT,
+    id,
+  };
+};
+
+export const getServicesByAccountSuccess = (servicesByAccount) => {
+  console.log("action", servicesByAccount);
+  return {
+    type: GET_SERVICE_BY_ACCOUNT_SUCCESS,
+    servicesByAccount,
+  };
+};
+
+export const getServicesByAccountFail = (error) => {
+  return {
+    type: GET_SERVICE_BY_ACCOUNT_FAIL,
+    error,
+  };
+}

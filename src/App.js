@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import AppRoutes from './routes/Routes';
-import { userLoginSuccess, userLogout } from "./redux/action/Authentication";
+import { userLoginSuccess, userLogout, signIn } from "./redux/action/Authentication";
 import "./style.css";
 
 
@@ -12,8 +12,8 @@ function App() {
   console.log(currentUser);
 
   const checkLogin = () => {
-    const user  = localStorage.getItem("DATA");
-    console.log(user)
+    const user  = JSON.parse(localStorage.getItem("DATA"));
+    console.log(user);
     if(!user) {
       dispatch(userLogout());
     } else {

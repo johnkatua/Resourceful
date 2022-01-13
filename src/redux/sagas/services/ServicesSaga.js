@@ -6,8 +6,10 @@ import {
   getServicesBySubcategoryFail,
   getSingleServiceSuccess,
   getSingleServiceFail,
+  getServicesByAccountSuccess,
+  getServicesByAccountFail,
 } from "../../action/Services";
-import { getServicesApi, getServicesBySubcategoryApi, getSingleServiceApi } from "../../../api/Services";
+import { getServicesApi, getServicesBySubcategoryApi, getSingleServiceApi, getServicesByAccountApi } from "../../../api/Services";
 
 export function* getSingleServiceSaga(action) {
   try {
@@ -34,5 +36,15 @@ export function* getServicesBySubCategoriesSaga(action) {
     console.log(action.id);
   } catch (error) {
     yield put(getServicesBySubcategoryFail("Failed to load services..."));
+  }
+}
+
+export function* getServicesByAccountSaga(action) {
+  try {
+    const servicesByAccount = yield call(getServicesByAccountApi, action.id);
+    yield put(getServicesByAccountSuccess(servicesByAccount));
+    console.log(servicesByAccount);
+  } catch (error) {
+    yield put(getServicesByAccountFail("Could not retrieve all services"));
   }
 }

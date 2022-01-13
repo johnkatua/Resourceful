@@ -9,13 +9,19 @@ export const getSingleServiceApi = async (id) => {
 export const getServicesApi = async () => {
   const GET_SERVICES_API_ENDPOINT = "http://localhost:5000/getAllServices";
   const { data } = await axios.get(GET_SERVICES_API_ENDPOINT);
-  console.log(data);
   return data;
 };
 
 export const getServicesBySubcategoryApi = async (id) => {
   const GET_SERVICE_BY_SUBCATEGORY_API_ENDPOINT = `http://localhost:5000/getServicesBySubCategories/${id}`;
   const { data } = await axios.get(GET_SERVICE_BY_SUBCATEGORY_API_ENDPOINT);
-  console.log("api", data);
+  console.log("subcategoryapi", data);
   return data;
 };
+
+export const getServicesByAccountApi = async (id) => {
+  const GET_SERVICE_BY_ACCOUNT_API_ENDPOINT = `http://localhost:5000/getServicesByAccount/${id}`;
+  const { data } = await axios.get(GET_SERVICE_BY_ACCOUNT_API_ENDPOINT);
+  console.log("accountapi", data);
+  return data;                                                                                                                                                                                                    
+}

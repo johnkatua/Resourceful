@@ -8,6 +8,9 @@ import {
   GET_SINGLE_SERVICE,
   GET_SINGLE_SERVICE_SUCCESS,
   GET_SINGLE_SERVICE_FAIL,
+  GET_SERVICE_BY_ACCOUNT,
+  GET_SERVICE_BY_ACCOUNT_FAIL,
+  GET_SERVICE_BY_ACCOUNT_SUCCESS,
 } from "../types/Types";
 
 // get single service
@@ -88,3 +91,30 @@ export const getServicesBySubcategoryReducer = (state = { serviceBySubcategories
       return state;
   }
 };
+
+// get service by account
+export const getServicesByAccountReducer = (state = { servicesByAccount: [] }, action) => {
+  console.log("myState", state);
+  switch (action.type) {
+    case GET_SERVICE_BY_ACCOUNT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_SERVICE_BY_ACCOUNT_SUCCESS:
+      console.log("action***", action);
+      return {
+        ...state,
+        loading: false,
+        servicesByAccount: [action.servicesByAccount],
+      };
+    case GET_SERVICE_BY_ACCOUNT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    default:
+      return state;
+  }
+}

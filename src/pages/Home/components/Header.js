@@ -45,7 +45,7 @@ const Header = () => {
             <div className="header--auth__details">
               <Dropdown>
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  {currentUser}
+                  {currentUser.name}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>

@@ -93,9 +93,9 @@ export const signIn = (payload, navigate) => {
     .then((response) => {
       console.log(response);
       const { token, user } = response.data.data;
-      localStorage.setItem("DATA", user.name);
+      localStorage.setItem("DATA", JSON.stringify(user));
       localStorage.setItem("TOKEN", token);
-      dispatch(userLoginSuccess(user.name));
+      dispatch(userLoginSuccess(user));
       navigate("/")
     })
     .catch((error) => {
