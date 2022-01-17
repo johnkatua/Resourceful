@@ -13,7 +13,10 @@ import { getServicesApi, getServicesBySubcategoryApi, getSingleServiceApi, getSe
 
 export function* getSingleServiceSaga(action) {
   try {
+    // yield keyword tells the function to wait for the result of the call before continuing
+    // call keyword is used to call an async function
     const service = yield call(getSingleServiceApi, action.id);
+    // put keyword tells the saga to dispatch an action
     yield put(getSingleServiceSuccess(service));
   } catch (error) {
     yield put(getSingleServiceFail("Fail to load service..."));

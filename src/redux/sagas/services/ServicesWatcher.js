@@ -3,6 +3,7 @@ import { GET_SERVICES, GET_SERVICE_BY_SUBCATEGORY, GET_SINGLE_SERVICE, GET_SERVI
 import { getServicesByAccountSaga, getServicesBySubCategoriesSaga, getServicesSaga, getSingleServiceSaga } from "./ServicesSaga";
 
 export default function* watchServicesSaga() {
+  // takeLatest keyword tells the saga to only run the latest action
   yield takeLatest(GET_SINGLE_SERVICE, getSingleServiceSaga);
   yield takeLatest(GET_SERVICES, getServicesSaga);
   yield takeLatest(GET_SERVICE_BY_SUBCATEGORY, getServicesBySubCategoriesSaga);
