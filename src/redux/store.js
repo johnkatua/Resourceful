@@ -14,6 +14,7 @@ import {
 } from "./reducers/ServicesReducer";
 
 import authentication from "../redux/reducers/AuthenticationReducer";
+import createServiceReducer from "../redux/reducers/CreateServiceReducer";
 
 const initState = {
   authentication: {
@@ -31,6 +32,7 @@ export default function configureStore(initialState = initState) {
   const store = createStore(
     combineReducers({
       authentication,
+      createServiceReducer,
       subCategories: getAllSubCategoriesReducer,
       services: getServicesReducer,
       serviceBySubcategories: getServicesBySubcategoryReducer,
@@ -41,6 +43,8 @@ export default function configureStore(initialState = initState) {
     composeWithDevTools(applyMiddleware(sagaMiddleware, thunk, logger))
   );
   sagaMiddleware.run(rootSaga);
+
+  console.log('store', initialState)
 
   return store;
 }

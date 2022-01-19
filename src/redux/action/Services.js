@@ -20,44 +20,48 @@ import {
 const serviceAbilityUrl = "http://localhost:5000/createService";
 
 // create service
-export const createService = () => {
-  return {
-    type: CREATE_SERVICE,
-  }
-};
+// export const createService = () => {
+//   return {
+//     type: CREATE_SERVICE,
+//   }
+// };
 
-export const createServiceSuccess = (service) => {
-  return {
-    type: CREATE_SERVICE_SUCCESS,
-    payload: {
-      service,
-    },
-  }
-}
+// export const createServiceSuccess = (service) => {
+//   return {
+//     type: CREATE_SERVICE_SUCCESS,
+//     payload: {
+//       service,
+//     },
+//   }
+// }
 
-export const createServiceFail = (error) => {
-  return {
-    type: CREATE_SERVICE_FAIL,
-    payload: {
-      error,
-    }
-  }
-};
+// export const createServiceFail = (error) => {
+//   return {
+//     type: CREATE_SERVICE_FAIL,
+//     payload: {
+//       error,
+//     }
+//   }
+// };
 
-export const serviceAbility = (payload) => {
-  return function(dispatch) {
-    dispatch(createService());
-    axios({
-      method: 'POST',
-      url: serviceAbilityUrl,
-      data: payload
-    })
-    .then((response) => {
-      const { service } = response.data;
-      dispatch(createServiceSuccess(service));
-    })
-  }
-}
+// export const serviceAbility = (payload) => {
+//   console.log(payload);
+//   return function(dispatch) {
+//     dispatch(createService());
+//     axios({
+//       method: 'POST',
+//       url: serviceAbilityUrl,
+//       data: payload
+//     })
+//     .then((response) => {
+//       const { service } = response.data;
+//       dispatch(createServiceSuccess(service));
+//     })
+//     .catch((error) => {
+//       dispatch(createServiceFail(error));
+//     })
+//   }
+// }
 
 // get single service
 export const getSingleService = (id) => {
