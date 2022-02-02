@@ -1,36 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FloatingLabel, Form, Row, Col, Button } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 import { getAllSubCategories } from "../../../redux/action/SubCategories";
 import { postService } from "../../../redux/action/CreateService";
 
-
-
-
 const CreateService = () => {
+  const [photo, setPhoto] = useState({});
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [provider, setProvider] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.authentication);
   const { subCategories } = useSelector((state) => state.subCategories);
   const { postedService, error } = useSelector((state) => state.createServiceReducer);
 
-  console.log(postedService);
-  console.log('err', error);
-
+  const handleValueChange = (event) => {
+    setProvider((provider) => ({ ...provider, [event.target.name]: event.target.value }));
+  };
   React.useEffect(() => {
-    dispatch(getAllSubCategories()); 
+    dispatch(getAllSubCategories());
   }, [dispatch]);
+
+  const savePhoto = (e) => {
+    setPhoto(e.target.files[0]);
+    setPhotoUrl(e.target.files[0].name);
+  };
+
+  const handleSubmit = () => {
+    console.log(provider);
+    // HANDLE VALIDATION
+    // ATTACH ACCOUNT ID TO PROVIDER OBJECT
+    // provider.accountId = currentUser.id;
+    // MAKE A PHOTO UPLOAD AND GET URL
+    // CALL DISPATCH TO SEND INFO TO API
+  };
 
   const formik = useFormik({
     initialValues: {
       name: "",
       description: "",
-      photo: "",
+      photo: photo,
       delivery_point: "",
       consumer_count: "",
       service_readiness: "",
@@ -48,14 +61,14 @@ const CreateService = () => {
       delivery_point: Yup.string().required("* Delivery point field is required"),
       consumer_count: Yup.string()
         .required("* Consumer count field is required")
-        .test("Is Positive", "* Customer should be greater than 0", (value) => (value) > 0),
+        .test("Is Positive", "* Customer should be greater than 0", (value) => value > 0),
       service_readiness: Yup.string().required("* Service readiness field is required"),
       support_team: Yup.string().required("* Support team field is required"),
       support_language: Yup.string().required("* Support language field is required"),
       service_duration: Yup.string().required("* Service duration field is required"),
       price: Yup.string()
         .required("* Price field is required")
-        .test("Is Positive", "Price should be greater than 0", (value) => (value) > 0),
+        .test("Is Positive", "Price should be greater than 0", (value) => value > 0),
       account_id: Yup.string().required("* Provider name field is required"),
       service_sub_categories_id: Yup.string().required("* Category field is required"),
     }),
@@ -74,66 +87,68 @@ const CreateService = () => {
         account_id,
         service_sub_categories_id,
       } = values;
-      console.log(values);
-      dispatch(
-        postService({
-          name,
-          description,
-          photo,
-          delivery_point,
-          consumer_count,
-          service_readiness,
-          support_team,
-          support_language,
-          service_duration,
-          price,
-          account_id,
-          service_sub_categories_id,
-        }, navigate)
-      );
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("photo", photo);
+      formData.append("delivery_point", delivery_point);
+      formData.append("consumer_count", consumer_count);
+      formData.append("service_readiness", service_readiness);
+      formData.append("support_team", support_team);
+      formData.append("support_language", support_language);
+      formData.append("service_duration", service_duration);
+      formData.append("price", price);
+      formData.append("account_id", account_id);
+      formData.append("service_sub_categories_id", service_sub_categories_id);
+      dispatch(postService(formData));
+      // dispatch(
+      //   postService({
+      //     name,
+      //     description,
+      //     photo,
+      //     delivery_point,
+      //     consumer_count,
+      //     service_readiness,
+      //     support_team,
+      //     support_language,
+      //     service_duration,
+      //     price,
+      //     account_id,
+      //     service_sub_categories_id,
+      //   }, navigate)
+      // );
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingInputGrid" label="Service name">
             <Form.Control
               type="text"
               name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
+              value={provider.name}
+              onChange={handleValueChange}
               placeholder="Hello"
             />
           </FloatingLabel>
           <span>{formik.errors.name}</span>
         </Col>
         <Col md>
-          <FloatingLabel controlId="floatingInputGrid" label="Provider name">
-            <Form.Control
-              type="text"
-              name="account_id"
-              value={currentUser.name}
-              onChange={formik.handleChange}
-              placeholder="null"
-            />
-          </FloatingLabel>
-          <span>{formik.errors.account_id}</span>
-        </Col>
-      </Row>
-      <Row className="g-1 m-1">
-        <Col md>
           <FloatingLabel controlId="floatingTextarea" label="description">
             <Form.Control
               as="textarea"
               name="description"
-              value={formik.values.description}
-              onChange={formik.handleChange}
+              value={provider.description}
+              onChange={handleValueChange}
               placeholder="null"
             />
           </FloatingLabel>
           <span>{formik.errors.description}</span>
         </Col>
+      </Row>
+      {/* <Row className="g-1 m-1">
+        
       </Row>
       <Row className="g-2 m-1">
         <Col md>
@@ -214,10 +229,10 @@ const CreateService = () => {
           <FloatingLabel controlId="floatingFormFile">
             <Form.Control
               type="file"
-              className=""
+              accept="image/*"
+              enctype="multipart/form-data"
               name="photo"
-              value={formik.values.photo}
-              onChange={formik.handleChange}
+              onChange={savePhoto}
             />
           </FloatingLabel>
           <span>{formik.errors.photo}</span>
@@ -253,8 +268,8 @@ const CreateService = () => {
           </FloatingLabel>
         </Col>
         <span>{formik.errors.service_sub_categories_id}</span>
-      </Row>
-      <Button variant="primary" type="submit" className="m-2" disabled={!formik.isValid}>
+      </Row> */}
+      <Button variant="primary" onClick={handleSubmit} className="m-2" disabled={!formik.isValid}>
         Submit
       </Button>
     </form>

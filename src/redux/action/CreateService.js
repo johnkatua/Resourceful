@@ -6,7 +6,6 @@ const createServiceUrl = "http://localhost:5000/createService";
 console.log(createServiceUrl);
 
 export const createService = () => {
-  console.log('hello');
   return {
     type: CREATE_SERVICE,
   }
@@ -30,12 +29,15 @@ export const createServiceFailure = (error) => {
 };
 
 export const postService = (payload, navigate) => {
+  console.log(payload);
   return function(dispatch) {
     dispatch(createService());
+      // let formData = new FormData();
+      // formData.append("photo", payload.photo.name);
     axios({
       method: 'POST',
       url: createServiceUrl,
-      data: payload
+      data: payload,
     })
     .then((response) => {
       const { service } = response.data;
