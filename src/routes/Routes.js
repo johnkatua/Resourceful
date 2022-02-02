@@ -7,8 +7,6 @@ import Account from "../pages/Profile/components/Account";
 import CreateService from "../pages/Profile/components/CreateService";
 import Pricing from "../pages/Profile/components/Pricing";
 import ViewService from "../pages/Profile/components/ViewService";
-import UploadFile from "../pages/Profile/components/UploadFile";
-import UploadService from "../pages/Profile/components/UploadService";
 
 const LoginPage = lazy(() => import("../pages/Login/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/Register/RegisterPage"));
@@ -57,7 +55,7 @@ const AppRoutes = () => {
           >
             <Route path="" element={<Account />} />
             <Route path="pricing" element={<Pricing />} />
-            <Route path="createService" element={<UploadFile />} />
+            <Route path="createService" element={<CreateService />} />
             <Route path="viewService" element={<ViewService />} />
           </Route>
           <Route

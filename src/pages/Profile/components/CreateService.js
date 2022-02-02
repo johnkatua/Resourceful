@@ -1,195 +1,184 @@
-import React, { useState, useEffect } from "react";
-import { FloatingLabel, Form, Row, Col, Button } from "react-bootstrap";
-import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 
 import { getAllSubCategories } from "../../../redux/action/SubCategories";
 import { postService } from "../../../redux/action/CreateService";
 
+
+const schema = Yup.object().shape({
+  name: Yup.string().required("* Name field is required"),
+  description: Yup.string().required("* Description field is required"),
+  photo: Yup.mixed().required("* Photo field is required"),
+  delivery_point: Yup.string().required("* Delivery point field is required"),
+  consumer_count: Yup.string()
+    .required("* Consumer count field is required")
+    .test("Is Positive", "* Customer should be greater than 0", (value) => value > 0),
+  service_readiness: Yup.string().required("* Service readiness field is required"),
+  support_team: Yup.string().required("* Support team field is required"),
+  support_language: Yup.string().required("* Support language field is required"),
+  service_duration: Yup.string().required("* Service duration field is required"),
+  price: Yup.string()
+    .required("* Price field is required")
+    .test("Is Positive", "Price should be greater than 0", (value) => value > 0),
+  account_id: Yup.string().required("* Provider name field is required"),
+  service_sub_categories_id: Yup.string().required("* Category field is required"),
+});
+
 const CreateService = () => {
-  const [photo, setPhoto] = useState({});
-  const [photoUrl, setPhotoUrl] = useState("");
-  const [provider, setProvider] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state) => state.authentication);
+   const { currentUser } = useSelector((state) => state.authentication);
+  const [photo, setPhoto] = useState("");
+  console.log("photo", photo);
+  const [photoName, setPhotoName] = useState("");
+  const [formData, setFormData] = useState({
+    account_id: currentUser.id,
+  });
   const { subCategories } = useSelector((state) => state.subCategories);
-  const { postedService, error } = useSelector((state) => state.createServiceReducer);
 
-  const handleValueChange = (event) => {
-    setProvider((provider) => ({ ...provider, [event.target.name]: event.target.value }));
+  console.log(formData);
+
+  const {
+    register,
+    formState: { errors, isValid },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const saveFile = (e) => {
+    setPhoto(e.target.files[0]);
+    setPhotoName(e.target.files[0].name);
   };
-  React.useEffect(() => {
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const uploadService = (e) => {
+    e.preventDefault();
+
+    const payload = new FormData();
+    payload.append("name", formData.name);
+    payload.append("description", formData.description);
+    payload.append("photo", photo);
+    console.log(photo);
+    payload.append("delivery_point", formData.delivery_point);
+    payload.append("consumer_count", formData.consumer_count);
+    payload.append("service_readiness", formData.service_readiness);
+    payload.append("support_team", formData.support_team);
+    payload.append("support_language", formData.support_language);
+    payload.append("service_duration", formData.service_duration);
+    payload.append("price", formData.price);
+    payload.append("account_id", formData.account_id);
+    payload.append("service_sub_categories_id", formData.service_sub_categories_id);
+
+    console.log(payload);
+
+    dispatch(postService(payload, navigate));
+  }
+
+  useEffect(() => {
     dispatch(getAllSubCategories());
   }, [dispatch]);
 
-  const savePhoto = (e) => {
-    setPhoto(e.target.files[0]);
-    setPhotoUrl(e.target.files[0].name);
-  };
-
-  const handleSubmit = () => {
-    console.log(provider);
-    // HANDLE VALIDATION
-    // ATTACH ACCOUNT ID TO PROVIDER OBJECT
-    // provider.accountId = currentUser.id;
-    // MAKE A PHOTO UPLOAD AND GET URL
-    // CALL DISPATCH TO SEND INFO TO API
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-      photo: photo,
-      delivery_point: "",
-      consumer_count: "",
-      service_readiness: "",
-      support_team: "",
-      support_language: "",
-      service_duration: "",
-      price: "",
-      account_id: currentUser.id,
-      service_sub_categories_id: "",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required("* Name field is required"),
-      description: Yup.string().required("* Description field is required"),
-      photo: Yup.mixed().required("* Photo field is required"),
-      delivery_point: Yup.string().required("* Delivery point field is required"),
-      consumer_count: Yup.string()
-        .required("* Consumer count field is required")
-        .test("Is Positive", "* Customer should be greater than 0", (value) => value > 0),
-      service_readiness: Yup.string().required("* Service readiness field is required"),
-      support_team: Yup.string().required("* Support team field is required"),
-      support_language: Yup.string().required("* Support language field is required"),
-      service_duration: Yup.string().required("* Service duration field is required"),
-      price: Yup.string()
-        .required("* Price field is required")
-        .test("Is Positive", "Price should be greater than 0", (value) => value > 0),
-      account_id: Yup.string().required("* Provider name field is required"),
-      service_sub_categories_id: Yup.string().required("* Category field is required"),
-    }),
-    onSubmit: (values) => {
-      const {
-        name,
-        description,
-        photo,
-        delivery_point,
-        consumer_count,
-        service_readiness,
-        support_team,
-        support_language,
-        service_duration,
-        price,
-        account_id,
-        service_sub_categories_id,
-      } = values;
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("description", description);
-      formData.append("photo", photo);
-      formData.append("delivery_point", delivery_point);
-      formData.append("consumer_count", consumer_count);
-      formData.append("service_readiness", service_readiness);
-      formData.append("support_team", support_team);
-      formData.append("support_language", support_language);
-      formData.append("service_duration", service_duration);
-      formData.append("price", price);
-      formData.append("account_id", account_id);
-      formData.append("service_sub_categories_id", service_sub_categories_id);
-      dispatch(postService(formData));
-      // dispatch(
-      //   postService({
-      //     name,
-      //     description,
-      //     photo,
-      //     delivery_point,
-      //     consumer_count,
-      //     service_readiness,
-      //     support_team,
-      //     support_language,
-      //     service_duration,
-      //     price,
-      //     account_id,
-      //     service_sub_categories_id,
-      //   }, navigate)
-      // );
-    },
-  });
   return (
-    <form>
+    <form onSubmit={uploadService}>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingInputGrid" label="Service name">
             <Form.Control
+              {...register("name")}
               type="text"
               name="name"
-              value={provider.name}
-              onChange={handleValueChange}
-              placeholder="Hello"
-            />
-          </FloatingLabel>
-          <span>{formik.errors.name}</span>
-        </Col>
-        <Col md>
-          <FloatingLabel controlId="floatingTextarea" label="description">
-            <Form.Control
-              as="textarea"
-              name="description"
-              value={provider.description}
-              onChange={handleValueChange}
+              value={formData.name}
+              onChange={handleChange}
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{formik.errors.description}</span>
+          <span>{errors.name?.message}</span>
+        </Col>
+        <Col md>
+          <FloatingLabel controlId="floatingInputGrid" label="Provider name">
+            <Form.Control type="text" name="account_id" value={currentUser.name} onChange={handleChange} placeholder="null" />
+          </FloatingLabel>
         </Col>
       </Row>
-      {/* <Row className="g-1 m-1">
-        
+      <Row className="g-1 m-1">
+        <Col md>
+          <FloatingLabel controlId="floatingTextarea" label="description">
+            <Form.Control
+              {...register("description")}
+              as="textarea"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="null"
+            />
+          </FloatingLabel>
+          <span>{errors.description?.message}</span>
+        </Col>
       </Row>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Delivery point">
-            <Form.Select id="delivery_point" name="delivery_point" onChange={formik.handleChange}>
+            <Form.Select
+              {...register("delivery_point")}
+              id="delivery_point"
+              name="delivery_point"
+              onChange={handleChange}
+            >
               <option>Select</option>
               <option value="physical">Physical</option>
               <option value="online">Online</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{formik.errors.delivery_point}</span>
+          <span>{errors.delivery_point?.message}</span>
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Consumer count">
             <Form.Control
+              {...register("consumer_count")}
               type="integer"
               min="1"
               step="any"
               name="consumer_count"
-              value={formik.values.consumer_count}
-              onChange={formik.handleChange}
+              value={formData.consumer_count}
+              onChange={handleChange}
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{formik.errors.consumer_count}</span>
+          <span>{errors.consumer_count?.message}</span>
         </Col>
       </Row>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Service readiness">
-            <Form.Select id="service_readiness" name="service_readiness" onChange={formik.handleChange}>
+            <Form.Select
+              {...register("service_readiness")}
+              id="service_readiness"
+              name="service_readiness"
+              onChange={handleChange}
+            >
               <option>Select</option>
               <option value="book">Book</option>
               <option value="readilyAvailable">Readily available</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{formik.errors.service_readiness}</span>
+          <span>{errors.service_readiness?.message}</span>
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Service duration">
-            <Form.Select id="service_duration" name="service_duration" onChange={formik.handleChange}>
+            <Form.Select
+              {...register("service_duration")}
+              id="service_duration"
+              name="service_duration"
+              onChange={handleChange}
+            >
               <option>Select</option>
               <option value="24hrs">24 hrs</option>
               <option value="48hrs">48 hrs</option>
@@ -198,64 +187,81 @@ const CreateService = () => {
               <option value="120hrs">120 hrs</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{formik.errors.service_duration}</span>
+          <span>{errors.service_duration?.message}</span>
         </Col>
       </Row>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Support team">
-            <Form.Select id="support_team" name="support_team" onChange={formik.handleChange}>
+            <Form.Select 
+              {...register("support_team")} 
+              id="support_team" 
+              name="support_team" 
+              onChange={handleChange}
+            >
               <option>Select</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{formik.errors.support_team}</span>
+          <span>{errors.support_team?.message}</span>
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Support language">
-            <Form.Select id="support_language" name="support_language" onChange={formik.handleChange}>
+            <Form.Select
+              {...register("support_language")}
+              id="support_language"
+              name="support_language"
+              onChange={handleChange}
+            >
               <option>Select</option>
               <option value="English">English</option>
               <option value="Kiswahili">Kiswahili</option>
               <option value="Amharic">Amharic</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{formik.errors.support_language}</span>
+          <span>{errors.support_language?.message}</span>
         </Col>
       </Row>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingFormFile">
             <Form.Control
+              {...register("photo")}
               type="file"
               accept="image/*"
-              enctype="multipart/form-data"
+              encType="multipart/form-data"
               name="photo"
-              onChange={savePhoto}
+              onChange={saveFile} 
             />
           </FloatingLabel>
-          <span>{formik.errors.photo}</span>
+          <span>{errors.photo?.message}</span>
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingInputGrid" label="Price">
             <Form.Control
+              {...register("price")}
               type="integer"
               min="1"
               step="any"
               name="price"
-              value={formik.values.price}
-              onChange={formik.handleChange}
+              value={formData.price}
+              onChange={handleChange}
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{formik.errors.price}</span>
+          <span>{errors.price?.message}</span>
         </Col>
       </Row>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Category">
-            <Form.Select id="service_sub_categories_id" name="service_sub_categories_id" onChange={formik.handleChange}>
+            <Form.Select
+              {...register("service_sub_categories_id")}
+              id="service_sub_categories_id"
+              name="service_sub_categories_id"
+              onChange={handleChange}
+            >
               <option>Select</option>
               {subCategories.map((subCategory) => {
                 return (
@@ -267,9 +273,9 @@ const CreateService = () => {
             </Form.Select>
           </FloatingLabel>
         </Col>
-        <span>{formik.errors.service_sub_categories_id}</span>
-      </Row> */}
-      <Button variant="primary" onClick={handleSubmit} className="m-2" disabled={!formik.isValid}>
+        <span>{errors.serviceSubCategoriesId?.message}</span>
+      </Row>
+      <Button variant="primary" type="submit" className="m-2" disabled={isValid}>
         Submit
       </Button>
     </form>
