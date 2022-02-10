@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   GET_SERVICES,
   GET_SERVICES_SUCCESS,
@@ -12,56 +11,7 @@ import {
   GET_SERVICE_BY_ACCOUNT,
   GET_SERVICE_BY_ACCOUNT_FAIL,
   GET_SERVICE_BY_ACCOUNT_SUCCESS,
-  CREATE_SERVICE,
-  CREATE_SERVICE_SUCCESS,
-  CREATE_SERVICE_FAIL,
 } from "../types/Types";
-
-const serviceAbilityUrl = "http://localhost:5000/createService";
-
-// create service
-// export const createService = () => {
-//   return {
-//     type: CREATE_SERVICE,
-//   }
-// };
-
-// export const createServiceSuccess = (service) => {
-//   return {
-//     type: CREATE_SERVICE_SUCCESS,
-//     payload: {
-//       service,
-//     },
-//   }
-// }
-
-// export const createServiceFail = (error) => {
-//   return {
-//     type: CREATE_SERVICE_FAIL,
-//     payload: {
-//       error,
-//     }
-//   }
-// };
-
-// export const serviceAbility = (payload) => {
-//   console.log(payload);
-//   return function(dispatch) {
-//     dispatch(createService());
-//     axios({
-//       method: 'POST',
-//       url: serviceAbilityUrl,
-//       data: payload
-//     })
-//     .then((response) => {
-//       const { service } = response.data;
-//       dispatch(createServiceSuccess(service));
-//     })
-//     .catch((error) => {
-//       dispatch(createServiceFail(error));
-//     })
-//   }
-// }
 
 // get single service
 export const getSingleService = (id) => {

@@ -12,6 +12,7 @@ import {
   getSingleServiceReducer,
   getServicesByAccountReducer,
 } from "./reducers/ServicesReducer";
+import { getProfileByAccountReducer } from "./reducers/ProfileReducer";
 
 import authentication from "../redux/reducers/AuthenticationReducer";
 import createServiceReducer from "../redux/reducers/CreateServiceReducer";
@@ -38,6 +39,7 @@ export default function configureStore(initialState = initState) {
       serviceBySubcategories: getServicesBySubcategoryReducer,
       service: getSingleServiceReducer,
       servicesByAccount: getServicesByAccountReducer,
+      profile: getProfileByAccountReducer,
     }),
     initialState,
     composeWithDevTools(applyMiddleware(sagaMiddleware, thunk, logger))

@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import Face from "../../../assets/Images/ali.jpeg";
+import { getProfileByAccount } from "../../../redux/action/Profile";
 
 const ProfileSidebar = () => {
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.profile);
+  const { currentUser } = useSelector((state) => state.authentication);
+  const userId = currentUser.id;
   const navigate = useNavigate();
   const location = useLocation().pathname;
+
+  const photo = profile.map((item) => {
+    return item.photo;
+  });
+
+  console.log(photo);
+
+
+  useEffect(() => {
+    dispatch(getProfileByAccount(userId));
+  } , [dispatch, userId]);
 
   const navigateToAccount = (e) => {
     e.preventDefault();
@@ -31,7 +47,7 @@ const ProfileSidebar = () => {
     <div className="profile--sidebar__container">
       <div className="profile--sidebar__avatar">
         <span>
-          <img src={Face} alt="avatar" className="img" />
+          <img src={photo} alt="avatar" className="img" />
         </span>
       </div>
       <div className="profile--sidebar__links">

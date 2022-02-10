@@ -11,41 +11,9 @@ import {
   GET_SERVICE_BY_ACCOUNT,
   GET_SERVICE_BY_ACCOUNT_FAIL,
   GET_SERVICE_BY_ACCOUNT_SUCCESS,
-  CREATE_SERVICE,
-  CREATE_SERVICE_SUCCESS,
-  CREATE_SERVICE_FAIL,
 } from "../types/Types";
 
-const initialState = {
-  createdService: [],
-  error: "",
-  loading: false,
-};
 
-// export const createServiceReducer = (state = initialState, action) => {
-//   console.log('createServicedsasd', state);
-//   switch (action.type) {
-//     case CREATE_SERVICE:
-//       return {
-//         ...state,
-//         loading: true,
-//       };
-//     case CREATE_SERVICE_SUCCESS:
-//       return {
-//         ...state,
-//         loading: false,
-//         createdService: action.payload.service,
-//       };
-//     case CREATE_SERVICE_FAIL:
-//       return {
-//         ...state,
-//         loading: false,
-//         error: action.payload,
-//       };
-//     default:
-//       return state;
-//   }
-// }
 
 // get single service
 export const getSingleServiceReducer = (state = { service: [] }, action) => {

@@ -1,8 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap';
+
+import { getProfileByAccount } from "../../redux/action/Profile";
 
 const Item = ({ item }) => {
+  const [show, setShow] = React.useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const navigate = useNavigate();
+
+  console.log(item.account_id);
 
   const viewItem = (e) => {
     e.preventDefault();
@@ -35,7 +44,20 @@ const Item = ({ item }) => {
         <div className="item--contact__details">
           <p>Price: {item.price}</p>
           <button>Request Service</button>
-          <button>Contact Provider</button>
+          <>
+            <button onClick={handleShow}>Contact Provider</button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Contact Info.</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Some text in the modal.</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
         </div>
       </div>
     </div>

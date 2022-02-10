@@ -32,8 +32,6 @@ export const postService = (payload, navigate) => {
   console.log(payload);
   return function(dispatch) {
     dispatch(createService());
-      // let formData = new FormData();
-      // formData.append("photo", payload.photo.name);
     axios({
       method: 'POST',
       url: createServiceUrl,
