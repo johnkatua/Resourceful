@@ -15,15 +15,35 @@ const Account = () => {
   useEffect(() => {
     dispatch(getProfileByAccount(userId));
   } , [dispatch, userId]);
+  
   return (
     <div>
       {profile.map((profile) => {
         const { about, email, facebook, instagram, linkedIn, location, phone, twitter, website } = profile;
         return (
-          <div>
-            <p>{about}</p>
+          <div className="profile--data">
+            <div className='profile--data__container'>
+              <div className="profile--data__header">
+                <h1>My Profile</h1>
+                <span>Edit</span>
+              </div>
+              <div className="profile--data__body">
+                <div className="profile--data__body--about">
+                  {about}
+                </div>
+                <div className="profile--data__body--contact">
+                  <span>{email}</span>
+                  <span>{phone}</span>
+                  <span>{facebook}</span>
+                  <span>{instagram}</span>
+                  <span>{linkedIn}</span>
+                  <span>{twitter}</span>
+                  <span>{website}</span>
+                </div>
+              </div>
+            </div>
           </div>
-        )
+        );
       })}
     </div>
   )
