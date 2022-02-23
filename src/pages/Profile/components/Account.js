@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { MdOutlineEmail, MdPhone } from "react-icons/md";
+import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+import { GoLocation } from 'react-icons/go';
 
 import { getProfileByAccount } from '../../../redux/action/Profile';
 
@@ -32,13 +35,28 @@ const Account = () => {
                   {about}
                 </div>
                 <div className="profile--data__body--contact">
-                  <span>{email}</span>
-                  <span>{phone}</span>
-                  <span>{facebook}</span>
-                  <span>{instagram}</span>
-                  <span>{linkedIn}</span>
-                  <span>{twitter}</span>
-                  <span>{website}</span>
+                  <span>
+                    <MdOutlineEmail />
+                  </span>
+                  <span>
+                    <MdPhone />
+                  </span>
+                  <span>
+                    <BsFacebook />
+                  </span>
+                  <span>
+                    <BsInstagram />
+                  </span>
+                  <span>
+                    <BsLinkedin />
+                  </span>
+                  <span>
+                    <BsTwitter />
+                  </span>
+                  {website !== 'N/A' ? <span>{website}</span> : null}
+                  <span>
+                    <GoLocation />
+                  </span>
                 </div>
               </div>
             </div>
