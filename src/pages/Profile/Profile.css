@@ -188,5 +188,6 @@
 }
 
 .profile--data__body--contact span {
+  cursor: pointer;
   font-size: 200%;
 };
