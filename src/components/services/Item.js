@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from "react-redux";
+import { Modal, Button } from "react-bootstrap";
 
 import { getProfileByAccount } from "../../redux/action/Profile";
 
 const Item = ({ item }) => {
   const [show, setShow] = React.useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
-  console.log(item.account_id);
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.profile);
+
+  console.log(profile);
+  console.log(item);
+
+  const providerId = item.account_id;
+
+  useEffect(() => {
+    dispatch(getProfileByAccount(providerId));
+  }, [dispatch, providerId]);
 
   const viewItem = (e) => {
     e.preventDefault();
@@ -46,17 +56,31 @@ const Item = ({ item }) => {
           <button>Request Service</button>
           <>
             <button onClick={handleShow}>Contact Provider</button>
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Contact Info.</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Some text in the modal.</Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
+            {profile.map((profile) => {
+              const { account_id, about, email } = profile;
+              return (
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Contact Provider</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    {account_id === item.account_id ? (
+                      <div>
+                        <p>{about}</p>
+                        <p>{email}</p>
+                      </div>
+                    ) : (
+                      <p>No profile found</p>
+                    )}
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              );
+            })}
           </>
         </div>
       </div>
