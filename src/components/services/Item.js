@@ -28,6 +28,14 @@ const Item = ({ item }) => {
     navigate(`/service/${item.id}`);
   };
 
+  const spanStyles = {
+    fontWeight: "bold",
+  };
+
+  const paraStyles ={
+    fontSize: "1.2rem",
+  }
+
   return (
     <div className="item--container">
       <div className="item--card__photo">
@@ -57,7 +65,7 @@ const Item = ({ item }) => {
           <>
             <button onClick={handleShow}>Contact Provider</button>
             {profile.map((profile) => {
-              const { account_id, about, email } = profile;
+              const { account_id, email, phone } = profile;
               return (
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
@@ -66,8 +74,10 @@ const Item = ({ item }) => {
                   <Modal.Body>
                     {account_id === item.account_id ? (
                       <div>
-                        <p>{about}</p>
-                        <p>{email}</p>
+                        <p style={paraStyles}>
+                          Thank you for selecting for choosing <span style={spanStyles}>{item.name}</span>, you can email the service
+                          provider via <span style={spanStyles}>{email}</span> or call <span style={spanStyles}>{phone}</span>
+                        </p>
                       </div>
                     ) : (
                       <p>No profile found</p>
