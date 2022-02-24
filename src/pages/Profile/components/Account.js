@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdOutlineEmail, MdPhone } from "react-icons/md";
+import { MdOutlineEmail, MdPhone, MdModeEdit } from "react-icons/md";
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { GoLocation } from 'react-icons/go';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -29,21 +29,14 @@ const Account = () => {
             <div className="profile--data__container">
               <div className="profile--data__header">
                 <h1>My Profile</h1>
-                <span>Edit</span>
+                <span>
+                  <MdModeEdit />
+                </span>
               </div>
               <div className="profile--data__body">
                 <div className="profile--data__body--about">{about}</div>
                 <div className="profile--data__body--contact">
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{email}</Tooltip>}>
-                    <span>
-                      <MdOutlineEmail />
-                    </span>
-                  </OverlayTrigger>
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{phone}</Tooltip>}>
-                    <span>
-                      <MdPhone />
-                    </span>
-                  </OverlayTrigger>
+                  <h2>Social Links</h2>
                   <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{facebook}</Tooltip>}>
                     <span>
                       <BsFacebook />
@@ -64,7 +57,23 @@ const Account = () => {
                       <BsTwitter />
                     </span>
                   </OverlayTrigger>
+                  {/* <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{website}</Tooltip>}>
+                    {website !== "N/A" ? <span>{website}</span> : null}
+                  </OverlayTrigger> */}
                   {website !== "N/A" ? <span>{website}</span> : null}
+                </div>
+                <div className="profile--data__body--contact">
+                  <h2 className="profile--data__body--header">Contact</h2>
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{email}</Tooltip>}>
+                    <span>
+                      <MdOutlineEmail />
+                    </span>
+                  </OverlayTrigger>
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{phone}</Tooltip>}>
+                    <span>
+                      <MdPhone />
+                    </span>
+                  </OverlayTrigger>
                   <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{location}</Tooltip>}>
                     <span>
                       <GoLocation />

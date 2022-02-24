@@ -160,7 +160,17 @@
   justify-content: space-between;
   padding: .5rem 1rem;
   border-bottom: 1px solid white;
+}
 
+.profile--data__header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.profile--data__header span {
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .profile--data__body {
@@ -190,4 +200,15 @@
 .profile--data__body--contact span {
   cursor: pointer;
   font-size: 200%;
-};
+}
+
+.profile--data__body--contact h2 {
+  display: flex;
+  flex-basis: 100%;
+  font-size: 1.5rem;
+}
+
+.profile--data__body--contact h2:hover {
+  text-decoration: underline;
+}
+
