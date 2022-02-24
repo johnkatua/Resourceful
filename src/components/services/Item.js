@@ -13,6 +13,8 @@ const Item = ({ item }) => {
 
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
+  const { currentUser } = useSelector((state) => state.authentication);
+  const currentUserId = currentUser.id;
 
   console.log(profile);
   console.log(item);
@@ -32,9 +34,9 @@ const Item = ({ item }) => {
     fontWeight: "bold",
   };
 
-  const paraStyles ={
+  const paraStyles = {
     fontSize: "1.2rem",
-  }
+  };
 
   return (
     <div className="item--container">
@@ -61,37 +63,42 @@ const Item = ({ item }) => {
         </div>
         <div className="item--contact__details">
           <p>Price: {item.price}</p>
-          <button>Request Service</button>
-          <>
-            <button onClick={handleShow}>Contact Provider</button>
-            {profile.map((profile) => {
-              const { account_id, email, phone } = profile;
-              return (
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Contact Provider</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {account_id === item.account_id ? (
-                      <div>
-                        <p style={paraStyles}>
-                          Thank you for selecting for choosing <span style={spanStyles}>{item.name}</span>, you can email the service
-                          provider via <span style={spanStyles}>{email}</span> or call <span style={spanStyles}>{phone}</span>
-                        </p>
-                      </div>
-                    ) : (
-                      <p>No profile found</p>
-                    )}
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              );
-            })}
-          </>
+          {providerId === currentUserId ? (
+            <button>Delete</button>
+          ) : (
+            <>
+              <button>Request Service</button>
+              <button onClick={handleShow}>Contact Provider</button>
+              {profile.map((profile) => {
+                const { account_id, email, phone } = profile;
+                return (
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Contact Provider</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {account_id === item.account_id ? (
+                        <div>
+                          <p style={paraStyles}>
+                            Thank you for selecting for choosing <span style={spanStyles}>{item.name}</span>, you can
+                            email the service provider via <span style={spanStyles}>{email}</span> or call{" "}
+                            <span style={spanStyles}>{phone}</span>
+                          </p>
+                        </div>
+                      ) : (
+                        <p>No profile found</p>
+                      )}
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>
