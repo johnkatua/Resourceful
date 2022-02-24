@@ -37,30 +37,41 @@ const Account = () => {
                 <div className="profile--data__body--about">{about}</div>
                 <div className="profile--data__body--contact">
                   <h2>Social Links</h2>
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{facebook}</Tooltip>}>
+                  {facebook !== "N/A" ? (
                     <span>
+                    <a href={facebook} target="_blank" rel="noopener noreferrer">
                       <BsFacebook />
-                    </span>
-                  </OverlayTrigger>
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{instagram}</Tooltip>}>
+                    </a>
+                  </span>
+                  ) : null}
+                  {instagram !== "N/A" ? (
                     <span>
-                      <BsInstagram />
+                      <a href={instagram} target="_blank" rel="noopener noreferrer">
+                        <BsInstagram />
+                      </a>
                     </span>
-                  </OverlayTrigger>
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{linkedIn}</Tooltip>}>
+                  ) : null}
+                  {linkedIn !== "N/A" ? (
                     <span>
-                      <BsLinkedin />
+                      <a href={linkedIn} target="_blank" rel="noopener noreferrer">
+                        <BsLinkedin />
+                      </a>
                     </span>
-                  </OverlayTrigger>
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{twitter}</Tooltip>}>
+                  ) : null}
+                  {twitter !== "N/A" ? (
                     <span>
-                      <BsTwitter />
+                      <a href={twitter} target="_blank" rel="noopener noreferrer">
+                        <BsTwitter />
+                      </a>
                     </span>
-                  </OverlayTrigger>
-                  {/* <OverlayTrigger placement="bottom" overlay={<Tooltip id="tooltip-bottom">{website}</Tooltip>}>
-                    {website !== "N/A" ? <span>{website}</span> : null}
-                  </OverlayTrigger> */}
-                  {website !== "N/A" ? <span>{website}</span> : null}
+                  ) : null}
+                  {website !== "N/A" ? (
+                    <span>
+                      <a href={website} target="_blank" rel="noopener noreferrer">
+                        {website}
+                      </a>
+                    </span>
+                  ) : null}
                 </div>
                 <div className="profile--data__body--contact">
                   <h2 className="profile--data__body--header">Contact</h2>
