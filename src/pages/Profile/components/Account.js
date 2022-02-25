@@ -97,12 +97,15 @@ const Account = () => {
                       </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="success" onClick={handleClose}>
-                        Create Profile
-                      </Button>
-                      <Button variant="primary" onClick={handleClose}>
-                        Edit Profile
-                      </Button>
+                      {profile ? (
+                        <Button variant="primary" onClick={handleClose}>
+                          Edit Profile
+                        </Button>
+                      ) : (
+                        <Button variant="success" onClick={handleClose}>
+                          Create Profile
+                        </Button>
+                      )}
                       <Button variant="secondary" onClick={handleClose}>
                         Close
                       </Button>
