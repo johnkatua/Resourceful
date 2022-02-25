@@ -8,6 +8,7 @@ export const getProfileByAccount = (id) => {
 };
 
 export const getProfileByAccountSuccess = (profile) => {
+  console.log(profile);
   return {
     type: GET_PROFILE_BY_ACCOUNT_SUCCESS,
     profile,

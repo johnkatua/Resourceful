@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
@@ -6,7 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import { getProfileByAccount } from "../../redux/action/Profile";
 
 const Item = ({ item }) => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
@@ -16,14 +16,17 @@ const Item = ({ item }) => {
   const { currentUser } = useSelector((state) => state.authentication);
   const currentUserId = currentUser.id;
 
-  console.log(profile);
-  console.log(item);
+  // console.log(profile);
+  // console.log(item);
 
   const providerId = item.account_id;
+  console.log(providerId);
 
   useEffect(() => {
     dispatch(getProfileByAccount(providerId));
   }, [dispatch, providerId]);
+
+  console.log(profile);
 
   const viewItem = (e) => {
     e.preventDefault();
@@ -71,6 +74,7 @@ const Item = ({ item }) => {
               <button onClick={handleShow}>Contact Provider</button>
               {profile.map((profile) => {
                 const { account_id, email, phone } = profile;
+                console.log(account_id);
                 return (
                   <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
