@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineEmail, MdPhone, MdModeEdit } from "react-icons/md";
 import { BsFacebook, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
-import { OverlayTrigger, Tooltip, Modal, Button } from "react-bootstrap";
+import { OverlayTrigger, Tooltip, Modal, Button, Row, Col, FloatingLabel, Form } from "react-bootstrap";
 
 import { getProfileByAccount } from "../../../redux/action/Profile";
 
@@ -35,17 +35,77 @@ const Account = () => {
                   <span onClick={handleShow}>
                     <MdModeEdit />
                   </span>
-                  <Modal show={show} onHide={handleClose} centered>
+                  <Modal show={show} onHide={handleClose} size="lg" centered>
                     <Modal.Header closeButton>
                       <Modal.Title>Profile</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      <p>Create and Edit profile</p>
+                      <Row className="g-1 m-1">
+                        <Col md>
+                          <FloatingLabel controlId="floatingTextarea" label="About">
+                            <Form.Control as="textarea" name="about" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                      </Row>
+                      <Row className="g-2 m-1">
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid">
+                            <Form.Control type="file" name="photo" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="email">
+                            <Form.Control type="text" name="location" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                      </Row>
+                      <Row className="g-2 m-1">
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="phone">
+                            <Form.Control type="text" name="phone" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="location">
+                            <Form.Control type="text" name="location" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                      </Row>
+                      <Row className="g-2 m-1">
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="LinkedIn">
+                            <Form.Control type="text" name="twitter" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="Twitter">
+                            <Form.Control type="text" name="twitter" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                      </Row>
+                      <Row className="g-2 m-1">
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="Instagram">
+                            <Form.Control type="text" name="instagram" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                        <Col md>
+                          <FloatingLabel controlId="floatingInputGrid" label="Facebook">
+                            <Form.Control type="text" name="facebook" placeholder="null" />
+                          </FloatingLabel>
+                        </Col>
+                      </Row>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="success" onClick={handleClose}>Create Profile</Button>
-                      <Button variant="primary" onClick={handleClose}>Edit Profile</Button>
-                      <Button variant="secondary" onClick={handleClose}>Close</Button>
+                      <Button variant="success" onClick={handleClose}>
+                        Create Profile
+                      </Button>
+                      <Button variant="primary" onClick={handleClose}>
+                        Edit Profile
+                      </Button>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
                     </Modal.Footer>
                   </Modal>
                 </>
