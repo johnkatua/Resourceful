@@ -25,7 +25,7 @@ const Account = () => {
   return (
     <div>
       {profile.map((profile) => {
-        const { about, email, facebook, instagram, linkedIn, location, phone, twitter, website } = profile;
+        const { about, email, facebook, instagram, linkedIn, location, phone, twitter, website, account_id } = profile;
         return (
           <div className="profile--data">
             <div className="profile--data__container">
@@ -43,55 +43,55 @@ const Account = () => {
                       <Row className="g-1 m-1">
                         <Col md>
                           <FloatingLabel controlId="floatingTextarea" label="About">
-                            <Form.Control as="textarea" name="about" placeholder="null" />
+                            <Form.Control as="textarea" name="about" value={about} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                       </Row>
                       <Row className="g-2 m-1">
                         <Col md>
-                          <FloatingLabel controlId="floatingInputGrid">
-                            <Form.Control type="file" name="photo" placeholder="null" />
+                          <FloatingLabel controlId="floatingInputGrid" label="Account ID">
+                            <Form.Control type="text" name="account_id" value={account_id} placeholder="null" disabled />
                           </FloatingLabel>
                         </Col>
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="email">
-                            <Form.Control type="text" name="location" placeholder="null" />
+                            <Form.Control type="text" name="email" value={email} placeholder="null" disabled />
                           </FloatingLabel>
                         </Col>
                       </Row>
                       <Row className="g-2 m-1">
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="phone">
-                            <Form.Control type="text" name="phone" placeholder="null" />
+                            <Form.Control type="text" name="phone" value={phone} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="location">
-                            <Form.Control type="text" name="location" placeholder="null" />
+                            <Form.Control type="text" name="location" value={location} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                       </Row>
                       <Row className="g-2 m-1">
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="LinkedIn">
-                            <Form.Control type="text" name="twitter" placeholder="null" />
+                            <Form.Control type="text" name="linkedIn" value={linkedIn} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="Twitter">
-                            <Form.Control type="text" name="twitter" placeholder="null" />
+                            <Form.Control type="text" name="twitter" value={twitter} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                       </Row>
                       <Row className="g-2 m-1">
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="Instagram">
-                            <Form.Control type="text" name="instagram" placeholder="null" />
+                            <Form.Control type="text" name="instagram" value={instagram} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                         <Col md>
                           <FloatingLabel controlId="floatingInputGrid" label="Facebook">
-                            <Form.Control type="text" name="facebook" placeholder="null" />
+                            <Form.Control type="text" name="facebook" value={facebook} placeholder="null" />
                           </FloatingLabel>
                         </Col>
                       </Row>
