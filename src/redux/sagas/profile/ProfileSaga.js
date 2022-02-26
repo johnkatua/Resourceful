@@ -1,6 +1,6 @@
 import { call, put } from "@redux-saga/core/effects";
-import { getProfileByAccountSuccess, getProfileByAccountFail } from "../../action/Profile";
-import { getProfileByAccountApi } from "../../../api/Profile";
+import { getProfileByAccountSuccess, getProfileByAccountFail, getProfileByServiceSuccess, getProfileByServiceFail } from "../../action/Profile";
+import { getProfileByAccountApi, getProfileByServiceApi } from "../../../api/Profile";
 
 export function* getProfileByAccountSaga(action) {
   try {
@@ -10,3 +10,12 @@ export function* getProfileByAccountSaga(action) {
     yield put(getProfileByAccountFail("Could not retrieve profile..."));
   }
 };
+
+export function* getProfileByServiceSaga(action) {
+  try {
+    const serviceProfile = yield call(getProfileByServiceApi, action.id);
+    yield put(getProfileByServiceSuccess(serviceProfile));
+  } catch (error) {
+    yield put(getProfileByServiceFail("Could not retrieve profile..."));
+  }
+}

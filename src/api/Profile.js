@@ -5,4 +5,11 @@ export const getProfileByAccountApi = async (id) => {
   const { data } = await axios.get(GET_PROFILE_BY_ACCOUNT_API_ENDPOINT);
   console.log(data);
   return data.profile;
-}
+};
+
+export const getProfileByServiceApi = async (id) => {
+  const GET_PROFILE_BY_SERVICE_API_ENDPOINT = `http://localhost:5000/getProfileByService/${id}`;
+  const { data } = await axios.get(GET_PROFILE_BY_SERVICE_API_ENDPOINT);
+  console.log(data);
+  return data.serviceProfile;
+};
