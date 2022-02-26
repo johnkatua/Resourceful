@@ -16,8 +16,6 @@ const ProfileSidebar = () => {
     return item.photo;
   });
 
-  console.log(photo);
-
 
   useEffect(() => {
     dispatch(getProfileByAccount(userId));

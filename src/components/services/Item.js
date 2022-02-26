@@ -17,7 +17,7 @@ const Item = ({ item }) => {
   const currentUserId = currentUser.id;
 
   // console.log(profile);
-  // console.log(item);
+  console.log(item);
 
   const providerId = item.account_id;
   console.log(providerId);
