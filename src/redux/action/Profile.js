@@ -1,4 +1,11 @@
-import { GET_PROFILE_BY_ACCOUNT, GET_PROFILE_BY_ACCOUNT_SUCCESS, GET_PROFILE_BY_ACCOUNT_FAIL } from "../types/Types";
+import {
+  GET_PROFILE_BY_ACCOUNT,
+  GET_PROFILE_BY_ACCOUNT_SUCCESS,
+  GET_PROFILE_BY_ACCOUNT_FAIL,
+  GET_PROFILE_BY_SERVICE,
+  GET_PROFILE_BY_SERVICE_SUCCESS,
+  GET_PROFILE_BY_SERVICE_FAIL,
+} from "../types/Types";
 
 export const getProfileByAccount = (id) => {
   return {
@@ -18,6 +25,28 @@ export const getProfileByAccountSuccess = (profile) => {
 export const getProfileByAccountFail = (error) => {
   return {
     type: GET_PROFILE_BY_ACCOUNT_FAIL,
+    error,
+  };
+};
+
+export const getProfileByService = (id) => {
+  return {
+    type: GET_PROFILE_BY_SERVICE,
+    id,
+  };
+};
+
+export const getProfileByServiceSuccess = (serviceProfile) => {
+  console.log(serviceProfile);
+  return {
+    type: GET_PROFILE_BY_SERVICE_SUCCESS,
+    serviceProfile,
+  };
+};
+
+export const getProfileByServiceFail = (error) => {
+  return {
+    type: GET_PROFILE_BY_SERVICE_FAIL,
     error,
   };
 };
