@@ -16,6 +16,6 @@ export function* getProfileByServiceSaga(action) {
     const serviceProfile = yield call(getProfileByServiceApi, action.id);
     yield put(getProfileByServiceSuccess(serviceProfile));
   } catch (error) {
-    yield put(getProfileByServiceFail("Could not retrieve profile..."));
+    yield put(getProfileByServiceFail(error));
   }
 }

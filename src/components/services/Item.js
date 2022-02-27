@@ -3,41 +3,35 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
 
-import { getProfileByAccount, getProfileByService } from "../../redux/action/Profile";
+import { getProfileByService } from "../../redux/action/Profile";
 
 const Item = ({ item }) => {
   const [show, setShow] = useState(false);
-  const [currentItem, setCurrentItem] = useState([]);
+  const [currentItem, setCurrentItem] = useState(item);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.profile);
   const { serviceProfile } = useSelector((state) => state.serviceProfile);
   const { currentUser } = useSelector((state) => state.authentication);
   const currentUserId = currentUser.id;
 
-  // console.log(profile);
-  // console.log(item);
-  // console.log(serviceProfile);
+  console.log(serviceProfile);
 
   const getItem = (e) => {
     e.preventDefault();
+    if(serviceProfile === []){
+      return null;
+    }
     dispatch(getProfileByService(item.id));
-    setCurrentItem(item);
+    setCurrentItem(currentItem);
     handleShow();
-    console.log('item', item);
   }
 
+  console.log(currentItem);
+
   const providerId = item.account_id;
-  // console.log(providerId);
-
-  useEffect(() => {
-    dispatch(getProfileByAccount(providerId));
-  }, [dispatch, providerId]);
-
-  // console.log(profile);
 
   const viewItem = (e) => {
     e.preventDefault();
@@ -83,8 +77,8 @@ const Item = ({ item }) => {
             <>
               <button>Request Service</button>
               <button onClick={getItem}>Contact Provider</button>
-              {profile.map((profile) => {
-                const { account_id, email, phone } = profile;
+              {serviceProfile.map((profile) => {
+                const { account_id, account_email, phone } = profile;
                 console.log(account_id);
                 return (
                   <Modal show={show} onHide={handleClose}>
@@ -92,11 +86,11 @@ const Item = ({ item }) => {
                       <Modal.Title>Contact Provider</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      {account_id === item.account_id ? (
+                      {account_id === item.account_id  ? (
                         <div>
                           <p style={paraStyles}>
                             Thank you for selecting for choosing <span style={spanStyles}>{item.name}</span>, you can
-                            email the service provider via <span style={spanStyles}>{email}</span> or call{" "}
+                            email the service provider via <span style={spanStyles}>{account_email}</span> or call{" "}
                             <span style={spanStyles}>{phone}</span>
                           </p>
                         </div>

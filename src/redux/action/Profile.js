@@ -45,6 +45,7 @@ export const getProfileByServiceSuccess = (serviceProfile) => {
 };
 
 export const getProfileByServiceFail = (error) => {
+  console.log(error);
   return {
     type: GET_PROFILE_BY_SERVICE_FAIL,
     error,

@@ -11,6 +11,9 @@ import {
   GET_SERVICE_BY_ACCOUNT,
   GET_SERVICE_BY_ACCOUNT_FAIL,
   GET_SERVICE_BY_ACCOUNT_SUCCESS,
+  DELETE_SERVICE,
+  DELETE_SERVICE_SUCCESS,
+  DELETE_SERVICE_FAIL,
 } from "../types/Types";
 
 
@@ -111,6 +114,31 @@ export const getServicesByAccountReducer = (state = { servicesByAccount: [] }, a
         servicesByAccount: [action.servicesByAccount],
       };
     case GET_SERVICE_BY_ACCOUNT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    default:
+      return state;
+  }
+};
+
+// delete service
+export const deleteServiceReducer = (state = { service: [] }, action) => {
+  switch (action.type) {
+    case DELETE_SERVICE:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_SERVICE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        service: [action.service.filter((service) => service.id !== action.id)],
+      };
+    case DELETE_SERVICE_FAIL:
       return {
         ...state,
         loading: false,
