@@ -3,30 +3,41 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
 
-import { getProfileByAccount } from "../../redux/action/Profile";
+import { getProfileByAccount, getProfileByService } from "../../redux/action/Profile";
 
 const Item = ({ item }) => {
   const [show, setShow] = useState(false);
+  const [currentItem, setCurrentItem] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
+  const { serviceProfile } = useSelector((state) => state.serviceProfile);
   const { currentUser } = useSelector((state) => state.authentication);
   const currentUserId = currentUser.id;
 
   // console.log(profile);
-  console.log(item);
+  // console.log(item);
+  // console.log(serviceProfile);
+
+  const getItem = (e) => {
+    e.preventDefault();
+    dispatch(getProfileByService(item.id));
+    setCurrentItem(item);
+    handleShow();
+    console.log('item', item);
+  }
 
   const providerId = item.account_id;
-  console.log(providerId);
+  // console.log(providerId);
 
   useEffect(() => {
     dispatch(getProfileByAccount(providerId));
   }, [dispatch, providerId]);
 
-  console.log(profile);
+  // console.log(profile);
 
   const viewItem = (e) => {
     e.preventDefault();
@@ -71,7 +82,7 @@ const Item = ({ item }) => {
           ) : (
             <>
               <button>Request Service</button>
-              <button onClick={handleShow}>Contact Provider</button>
+              <button onClick={getItem}>Contact Provider</button>
               {profile.map((profile) => {
                 const { account_id, email, phone } = profile;
                 console.log(account_id);
