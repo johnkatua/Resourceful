@@ -11,9 +11,6 @@ import {
   GET_SERVICE_BY_ACCOUNT,
   GET_SERVICE_BY_ACCOUNT_FAIL,
   GET_SERVICE_BY_ACCOUNT_SUCCESS,
-  DELETE_SERVICE,
-  DELETE_SERVICE_SUCCESS,
-  DELETE_SERVICE_FAIL,
 } from "../types/Types";
 
 // get single service
@@ -100,32 +97,3 @@ export const getServicesByAccountFail = (error) => {
     error,
   };
 };
-
-// delete service
-export const deleteService = (id) => {
-  return {
-    type: DELETE_SERVICE,
-    id,
-  };
-};
-
-export const deleteServiceSuccess = (deletedService) => {
-  return {
-    type: DELETE_SERVICE_SUCCESS,
-    deletedService,
-  };
-};
-
-export const deleteServiceFail = (error) => {
-  return {
-    type: DELETE_SERVICE_FAIL,
-    error,
-  };
-};
-
-export const deleteSuccess = (id) => {
-  return {
-    type: DELETE_SERVICE_SUCCESS,
-    id,
-  }
-}

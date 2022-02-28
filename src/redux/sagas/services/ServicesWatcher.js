@@ -11,7 +11,7 @@ import {
   getServicesBySubCategoriesSaga,
   getServicesSaga,
   getSingleServiceSaga,
-  deleteServiceSaga,
+  // deleteServiceSaga,
 } from "./ServicesSaga";
 
 export default function* watchServicesSaga() {
@@ -20,5 +20,5 @@ export default function* watchServicesSaga() {
   yield takeLatest(GET_SERVICES, getServicesSaga);
   yield takeLatest(GET_SERVICE_BY_SUBCATEGORY, getServicesBySubCategoriesSaga);
   yield takeLatest(GET_SERVICE_BY_ACCOUNT, getServicesByAccountSaga);
-  yield takeLatest(DELETE_SERVICE, deleteServiceSaga);
+  // yield takeLatest(DELETE_SERVICE, deleteServiceSaga);
 }

@@ -125,28 +125,36 @@ export const getServicesByAccountReducer = (state = { servicesByAccount: [] }, a
 };
 
 // delete service
-export const deleteServiceReducer = (state = { deletedService: [] }, action) => {
-  switch (action.type) {
-    case DELETE_SERVICE:
-      return {
-        ...state,
-        loading: true,
-      };
-    case DELETE_SERVICE_SUCCESS:
-      // const deletedService = state.deletedService.filter((service) => service.id !== action.deletedService.id);
-      // return deletedService;
-      return {
-        ...state,
-        loading: false,
-        deletedService: state.deletedService.filter((service) => service.id !== action.id),
-      };
-    case DELETE_SERVICE_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
-    default:
-      return state;
-  }
-};
+// export const deleteServiceReducer = (state = { deletedService: [] }, action) => {
+//   switch (action.type) {
+//     case DELETE_SERVICE:
+//       return {
+//         ...state,
+//         loading: true,
+//       };
+//     case DELETE_SERVICE_SUCCESS:
+//       return {
+//         ...state,
+//         loading: false,
+//         deletedService: state.deletedService.filter((service) => service.id !== action.id),
+//       };
+//     case DELETE_SERVICE_FAIL:
+//       return {
+//         ...state,
+//         loading: false,
+//         error: action.error,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+// export const deleteSuccess = (state = { deletedService: [] }, action) => {
+//   switch (action.type) {
+//     case DELETE_SERVICE_SUCCESS:
+//       const newState = state.deletedService.filter((service) => service.id !== action.id);
+//       return newState;
+//     default:
+//       return state;
+//   }
+// };
