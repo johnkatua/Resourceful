@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
 
 import { getProfileByService } from "../../redux/action/Profile";
+import { deleteService } from "../../redux/action/Services";
 
 const Item = ({ item }) => {
   const [show, setShow] = useState(false);
@@ -31,6 +32,7 @@ const Item = ({ item }) => {
 
   const deleteItem = (e) => {
     e.preventDefault();
+    dispatch(deleteService(item.id));
     console.log("deleteItem", item);
   }
 

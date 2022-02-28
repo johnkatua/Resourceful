@@ -122,3 +122,10 @@ export const deleteServiceFail = (error) => {
     error,
   };
 };
+
+export const deleteSuccess = (id) => {
+  return {
+    type: DELETE_SERVICE_SUCCESS,
+    id,
+  }
+}

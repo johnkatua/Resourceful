@@ -28,7 +28,7 @@ export const getServicesByAccountApi = async (id) => {
 
 export const deleteServiceApi = async (id) => {
   const DELETE_SERVICE_API_ENDPOINT = `http://localhost:5000/deleteService/${id}`;
-  const { data } = await axios.get(DELETE_SERVICE_API_ENDPOINT);
+  const { data } = await axios.delete(DELETE_SERVICE_API_ENDPOINT);
   console.log("delete", data);
   return data;
 }

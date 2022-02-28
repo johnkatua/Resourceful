@@ -59,6 +59,6 @@ export function* deleteServiceSaga(action) {
     const deletedService = yield call(deleteServiceApi, action.id);
     yield put(deleteServiceSuccess(deletedService));
   } catch (error) {
-    yield put(deleteServiceFail("Failed to delete service..."));
+    yield put(deleteServiceFail(error));
   };  
 }

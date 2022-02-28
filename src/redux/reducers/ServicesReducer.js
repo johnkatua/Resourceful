@@ -133,10 +133,12 @@ export const deleteServiceReducer = (state = { deletedService: [] }, action) => 
         loading: true,
       };
     case DELETE_SERVICE_SUCCESS:
+      // const deletedService = state.deletedService.filter((service) => service.id !== action.deletedService.id);
+      // return deletedService;
       return {
         ...state,
         loading: false,
-        service: [action.deletedService.filter((service) => service.id !== action.id)],
+        deletedService: state.deletedService.filter((service) => service.id !== action.id),
       };
     case DELETE_SERVICE_FAIL:
       return {
@@ -147,4 +149,4 @@ export const deleteServiceReducer = (state = { deletedService: [] }, action) => 
     default:
       return state;
   }
-}
+};

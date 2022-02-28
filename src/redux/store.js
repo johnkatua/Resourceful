@@ -11,6 +11,7 @@ import {
   getServicesReducer,
   getSingleServiceReducer,
   getServicesByAccountReducer,
+  deleteServiceReducer,
 } from "./reducers/ServicesReducer";
 import { getProfileByAccountReducer, getProfileByServiceReducer } from "./reducers/ProfileReducer";
 
@@ -41,6 +42,7 @@ export default function configureStore(initialState = initState) {
       servicesByAccount: getServicesByAccountReducer,
       profile: getProfileByAccountReducer,
       serviceProfile: getProfileByServiceReducer,
+      deletedService: deleteServiceReducer
     }),
     initialState,
     composeWithDevTools(applyMiddleware(sagaMiddleware, thunk, logger))
