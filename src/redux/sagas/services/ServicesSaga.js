@@ -8,8 +8,10 @@ import {
   getSingleServiceFail,
   getServicesByAccountSuccess,
   getServicesByAccountFail,
+  deleteServiceSuccess,
+  deleteServiceFail,
 } from "../../action/Services";
-import { getServicesApi, getServicesBySubcategoryApi, getSingleServiceApi, getServicesByAccountApi } from "../../../api/Services";
+import { getServicesApi, getServicesBySubcategoryApi, getSingleServiceApi, getServicesByAccountApi, deleteServiceApi } from "../../../api/Services";
 
 export function* getSingleServiceSaga(action) {
   try {
@@ -50,4 +52,13 @@ export function* getServicesByAccountSaga(action) {
   } catch (error) {
     yield put(getServicesByAccountFail("Could not retrieve all services"));
   }
+};
+
+export function* deleteServiceSaga(action) {
+  try {
+    const deletedService = yield call(deleteServiceApi, action.id);
+    yield put(deleteServiceSuccess(deletedService));
+  } catch (error) {
+    yield put(deleteServiceFail("Failed to delete service..."));
+  };  
 }

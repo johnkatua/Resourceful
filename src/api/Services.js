@@ -24,4 +24,11 @@ export const getServicesByAccountApi = async (id) => {
   const { data } = await axios.get(GET_SERVICE_BY_ACCOUNT_API_ENDPOINT);
   console.log("accountapi", data);
   return data;                                                                                                                                                                                                    
+};
+
+export const deleteServiceApi = async (id) => {
+  const DELETE_SERVICE_API_ENDPOINT = `http://localhost:5000/deleteService/${id}`;
+  const { data } = await axios.get(DELETE_SERVICE_API_ENDPOINT);
+  console.log("delete", data);
+  return data;
 }

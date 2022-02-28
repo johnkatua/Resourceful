@@ -109,10 +109,10 @@ export const deleteService = (id) => {
   };
 };
 
-export const deleteServiceSuccess = (service) => {
+export const deleteServiceSuccess = (deletedService) => {
   return {
     type: DELETE_SERVICE_SUCCESS,
-    service,
+    deletedService,
   };
 };
 

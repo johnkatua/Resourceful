@@ -27,6 +27,11 @@ const Item = ({ item }) => {
     dispatch(getProfileByService(item.id));
     setCurrentItem(currentItem);
     handleShow();
+  };
+
+  const deleteItem = (e) => {
+    e.preventDefault();
+    console.log("deleteItem", item);
   }
 
   console.log(currentItem);
@@ -72,7 +77,7 @@ const Item = ({ item }) => {
         <div className="item--contact__details">
           <p>Price: {item.price}</p>
           {providerId === currentUserId ? (
-            <button>Delete</button>
+            <button onClick={deleteItem}>Delete</button>
           ) : (
             <>
               <button>Request Service</button>

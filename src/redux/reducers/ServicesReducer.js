@@ -125,7 +125,7 @@ export const getServicesByAccountReducer = (state = { servicesByAccount: [] }, a
 };
 
 // delete service
-export const deleteServiceReducer = (state = { service: [] }, action) => {
+export const deleteServiceReducer = (state = { deletedService: [] }, action) => {
   switch (action.type) {
     case DELETE_SERVICE:
       return {
@@ -136,7 +136,7 @@ export const deleteServiceReducer = (state = { service: [] }, action) => {
       return {
         ...state,
         loading: false,
-        service: [action.service.filter((service) => service.id !== action.id)],
+        service: [action.deletedService.filter((service) => service.id !== action.id)],
       };
     case DELETE_SERVICE_FAIL:
       return {
