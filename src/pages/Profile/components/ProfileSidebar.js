@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { FaCamera } from "react-icons/fa";
 
 import { getProfileByAccount } from "../../../redux/action/Profile";
 
@@ -46,6 +47,9 @@ const ProfileSidebar = () => {
       <div className="profile--sidebar__avatar">
         <span>
           <img src={photo} alt="avatar" className="img" />
+          <div className="profile--sidebar__avatar--edit">
+            <FaCamera />
+          </div>
         </span>
       </div>
       <div className="profile--sidebar__links">
