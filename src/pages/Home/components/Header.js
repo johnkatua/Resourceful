@@ -4,9 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Dropdown } from "react-bootstrap";
 
 import { signOut } from "../../../redux/action/Authentication";
+import Profile from "../../../components/profile/Profile";
 
 
 const Header = () => {
+  const [show, setShow] = React.useState(false);
+  const toggle = () => setShow(!show);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.authentication);
@@ -36,10 +39,12 @@ const Header = () => {
     <div className="header__container">
       <div className="header__title">
         <h3>Resourceful</h3>
-        <div className="header__search">
+        <button className="header__tour--btn" onClick={toggle}>Tour</button>
+        <Profile isOpen={show} toggle={toggle} />
+        {/* <div className="header__search">
           <input type="text" placeholder="Search Service" />
           🔍
-        </div>
+        </div> */}
         <div className="header__auth">
           {currentUser !== null ? (
             <div className="header--auth__details">

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { Modal,Button } from 'react-bootstrap';
 
-const Profile = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+const Profile = (props) => {
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={props.isOpen} onHide={props.toggle}>
         <Modal.Header>
           <Modal.Title>Contact Info.</Modal.Title>
         </Modal.Header>
         <Modal.Body>Some text in the modal.</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={props.toggle}>
             Close
           </Button>
         </Modal.Footer>
