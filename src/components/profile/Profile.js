@@ -5,7 +5,7 @@ const Profile = (props) => {
   return (
     <>
       <Modal show={props.isOpen} onHide={props.toggle}>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>Contact Info.</Modal.Title>
         </Modal.Header>
         <Modal.Body>Some text in the modal.</Modal.Body>
