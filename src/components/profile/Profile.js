@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal,Button } from 'react-bootstrap';
+
+import Slideshow from '../slideshow/SlideShow';
 
 const Profile = (props) => {
   return (
     <>
-      <Modal show={props.isOpen} onHide={props.toggle}>
+      <Modal show={props.isOpen} onHide={props.toggle} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton>
           <Modal.Title>Contact Info.</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Some text in the modal.</Modal.Body>
+        <Modal.Body>
+          <Slideshow /> 
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.toggle}>
             Close
