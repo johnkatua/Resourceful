@@ -14,6 +14,7 @@ export const deleteServiceReducer = (state = initialState, action) => {
         loading: true,
       };
     case DELETE_SERVICE_SUCCESS:
+      console.log("delete", initialState.deletedService);
       return {
         ...state,
         loading: false,

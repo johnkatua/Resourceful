@@ -15,6 +15,7 @@ const AllServices = () => {
   useEffect(() => {
     dispatch(getServices());
   }, [dispatch]);
+  
   return (
     <div className="all--service__container">
       {services.map((service) => {

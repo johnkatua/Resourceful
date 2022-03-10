@@ -1,11 +1,12 @@
 import axios from "axios";
 import { DELETE_SERVICE, DELETE_SERVICE_SUCCESS, DELETE_SERVICE_FAIL } from "../types/Types";
+import { getServices } from "./Services";
 
 
 export const deleteService = (id) => {
   return {
     type: DELETE_SERVICE,
-    payload: id,
+    id,
   };
 };
 
@@ -24,6 +25,7 @@ export const deleteServiceFailure = (error) => {
 };
 
 
+
 export const deleteServiceRequest = (id) => {
   return function (dispatch) {
     dispatch(deleteService(id));
@@ -35,7 +37,7 @@ export const deleteServiceRequest = (id) => {
         console.log("response", response);
         const { message } = response.data;
         dispatch(deleteServiceSuccess(message));
-        window.location.reload(false);
+        dispatch(getServices());
       })
       .catch((error) => {
         dispatch(deleteServiceFailure(error));

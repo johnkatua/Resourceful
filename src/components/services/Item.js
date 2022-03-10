@@ -5,8 +5,9 @@ import { Modal, Button } from "react-bootstrap";
 
 import { getProfileByService } from "../../redux/action/Profile";
 import { deleteServiceRequest } from "../../redux/action/DeleteService";
+import { getServices } from "../../redux/action/Services";
 
-const Item = ({ item }) => {
+const Item = ({ item, deleteItem }) => {
   const [show, setShow] = useState(false);
   const [currentItem, setCurrentItem] = useState(item);
   const handleClose = () => setShow(false);
@@ -16,9 +17,12 @@ const Item = ({ item }) => {
   const dispatch = useDispatch();
   const { serviceProfile } = useSelector((state) => state.serviceProfile);
   const { currentUser } = useSelector((state) => state.authentication);
+  const { services } = useSelector((state) => state.services);
   const currentUserId = currentUser.id;
 
-  console.log(serviceProfile);
+  console.log(services);
+
+  // console.log(serviceProfile);
 
   const getItem = (e) => {
     e.preventDefault();
@@ -30,12 +34,12 @@ const Item = ({ item }) => {
     handleShow();
   };
 
-  const deleteItem = (e) => {
-    e.preventDefault();
-    dispatch(deleteServiceRequest(item.id));
-  }
+  // const deleteItem = (e) => {
+  //   e.preventDefault();
+  //   dispatch(deleteServiceRequest(item.id));
+  // }
 
-  console.log(currentItem);
+  // console.log(currentItem);
 
   const providerId = item.account_id;
 
@@ -51,6 +55,10 @@ const Item = ({ item }) => {
   const paraStyles = {
     fontSize: "1.2rem",
   };
+
+  useEffect(() => {
+    dispatch(getServices());
+  }, [dispatch])
 
   return (
     <div className="item--container">
@@ -78,7 +86,7 @@ const Item = ({ item }) => {
         <div className="item--contact__details">
           <p>Price: {item.price}</p>
           {providerId === currentUserId ? (
-            <button onClick={deleteItem}>Delete</button>
+            <button onClick={() => deleteItem(item.id)}>Delete</button>
           ) : (
             <>
               <button>Request Service</button>
