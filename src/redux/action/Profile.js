@@ -5,6 +5,9 @@ import {
   GET_PROFILE_BY_SERVICE,
   GET_PROFILE_BY_SERVICE_SUCCESS,
   GET_PROFILE_BY_SERVICE_FAIL,
+  EDIT_PROFILE,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAIL,
 } from "../types/Types";
 
 export const getProfileByAccount = (id) => {
@@ -51,3 +54,25 @@ export const getProfileByServiceFail = (error) => {
     error,
   };
 };
+
+export const editProfile = (id) => {
+  return {
+    type: EDIT_PROFILE,
+    id,
+  };
+};
+
+export const editProfileSuccess = (profile) => {
+  return {
+    type: EDIT_PROFILE_SUCCESS,
+    profile,
+  };
+};
+
+export const editProfileFail = (error) => {
+  return {
+    type: EDIT_PROFILE_FAIL,
+    error,
+  };
+};
+ 

@@ -11,7 +11,12 @@ import {
   GET_SERVICE_BY_ACCOUNT,
   GET_SERVICE_BY_ACCOUNT_FAIL,
   GET_SERVICE_BY_ACCOUNT_SUCCESS,
+  DELETE_SERVICE,
+  DELETE_SERVICE_SUCCESS,
+  DELETE_SERVICE_FAIL,
 } from "../types/Types";
+
+import axios from "axios";
 
 // get single service
 export const getSingleService = (id) => {
@@ -95,5 +100,40 @@ export const getServicesByAccountFail = (error) => {
   return {
     type: GET_SERVICE_BY_ACCOUNT_FAIL,
     error,
+  };
+};
+
+// delete product
+export const deleteService = (id) => {
+  return {
+    type: DELETE_SERVICE,
+    id,
+  }
+};
+
+export const deleteServiceSuccess = () => {
+  return {
+    type: DELETE_SERVICE_SUCCESS,
+  }
+};
+
+export const deleteServiceFail = (error) => {
+  return {
+    type: DELETE_SERVICE_FAIL,
+    payload: error,
+  }
+};
+
+export const deleteItem = (id) => {
+  return (dispatch) => {
+    dispatch(deleteService(id));
+    axios
+      .delete(`http://localhost:5000/deleteService/${id}`)
+      .then((response) => {
+        dispatch(deleteServiceSuccess());
+      })
+      .catch((error) => {
+        dispatch(deleteServiceFail(error));
+      });
   };
 };

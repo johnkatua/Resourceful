@@ -11,9 +11,10 @@ import {
   getServicesReducer,
   getSingleServiceReducer,
   getServicesByAccountReducer,
+  // deleteServiceReducer,
 } from "./reducers/ServicesReducer";
 import { getProfileByAccountReducer, getProfileByServiceReducer } from "./reducers/ProfileReducer";
-import { deleteServiceReducer } from "./reducers/DeleteServiceReducer";
+// import { deleteServiceReducer } from "./reducers/DeleteServiceReducer";
 
 import authentication from "../redux/reducers/AuthenticationReducer";
 import createServiceReducer from "../redux/reducers/CreateServiceReducer";
@@ -35,7 +36,7 @@ export default function configureStore(initialState = initState) {
     combineReducers({
       authentication,
       createServiceReducer,
-      deleteServiceReducer,
+      // deleteServiceReducer,
       subCategories: getAllSubCategoriesReducer,
       services: getServicesReducer,
       serviceBySubcategories: getServicesBySubcategoryReducer,

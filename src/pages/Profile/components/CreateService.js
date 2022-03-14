@@ -100,11 +100,17 @@ const CreateService = () => {
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{errors.name?.message}</span>
+          {/* <span>{errors.name.message}</span> */}
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingInputGrid" label="Provider name">
-            <Form.Control type="text" name="account_id" value={currentUser.name} onChange={handleChange} placeholder="null" />
+            <Form.Control
+              type="text"
+              name="account_id"
+              value={currentUser.name}
+              onChange={handleChange}
+              placeholder="null"
+            />
           </FloatingLabel>
         </Col>
       </Row>
@@ -120,7 +126,7 @@ const CreateService = () => {
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{errors.description?.message}</span>
+          {/* <span>{errors.description.message}</span> */}
         </Col>
       </Row>
       <Row className="g-2 m-1">
@@ -137,7 +143,7 @@ const CreateService = () => {
               <option value="online">Online</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{errors.delivery_point?.message}</span>
+          {/* <span>{errors.delivery_point.message}</span> */}
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Consumer count">
@@ -152,7 +158,7 @@ const CreateService = () => {
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{errors.consumer_count?.message}</span>
+          {/* <span>{errors.consumer_count.message}</span> */}
         </Col>
       </Row>
       <Row className="g-2 m-1">
@@ -169,7 +175,7 @@ const CreateService = () => {
               <option value="readilyAvailable">Readily available</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{errors.service_readiness?.message}</span>
+          {/* <span>{errors.service_readiness.message}</span> */}
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Service duration">
@@ -187,24 +193,19 @@ const CreateService = () => {
               <option value="120hrs">120 hrs</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{errors.service_duration?.message}</span>
+          {/* <span>{errors.service_duration.message}</span> */}
         </Col>
       </Row>
       <Row className="g-2 m-1">
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Support team">
-            <Form.Select 
-              {...register("support_team")} 
-              id="support_team" 
-              name="support_team" 
-              onChange={handleChange}
-            >
+            <Form.Select {...register("support_team")} id="support_team" name="support_team" onChange={handleChange}>
               <option>Select</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{errors.support_team?.message}</span>
+          {/* <span>{errors.support_team.message}</span> */}
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingSelect" label="Support language">
@@ -220,7 +221,7 @@ const CreateService = () => {
               <option value="Amharic">Amharic</option>
             </Form.Select>
           </FloatingLabel>
-          <span>{errors.support_language?.message}</span>
+          {/* <span>{errors.support_language.message}</span> */}
         </Col>
       </Row>
       <Row className="g-2 m-1">
@@ -232,10 +233,10 @@ const CreateService = () => {
               accept="image/*"
               encType="multipart/form-data"
               name="photo"
-              onChange={saveFile} 
+              onChange={saveFile}
             />
           </FloatingLabel>
-          <span>{errors.photo?.message}</span>
+          {/* <span>{errors.photo.message}</span> */}
         </Col>
         <Col md>
           <FloatingLabel controlId="floatingInputGrid" label="Price">
@@ -250,7 +251,8 @@ const CreateService = () => {
               placeholder="null"
             />
           </FloatingLabel>
-          <span>{errors.price?.message}</span>
+          {/* <span>{errors.price.message}</span> */}
+          {/* <span>{errors.price.message}</span> */}
         </Col>
       </Row>
       <Row className="g-2 m-1">
@@ -273,7 +275,7 @@ const CreateService = () => {
             </Form.Select>
           </FloatingLabel>
         </Col>
-        <span>{errors.serviceSubCategoriesId?.message}</span>
+        {/* <span>{errors.serviceSubCategoriesId.message}</span> */}
       </Row>
       <Button variant="primary" type="submit" className="m-2" disabled={isValid}>
         Submit

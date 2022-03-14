@@ -16,6 +16,13 @@ import {
   DELETE_SERVICE_FAIL,
 } from "../types/Types";
 
+const initialState = {
+  services: [],
+  loading: false,
+  error: "",
+  deletedService: [],
+};
+
 
 
 // get single service
@@ -65,6 +72,12 @@ export const getServicesReducer = (state = { services: [] }, action) => {
         error: action.error,
         services: [],
       };
+    case DELETE_SERVICE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        services: [...state.services.filter((service) => service.id !== action.id)],
+      }
     default:
       return state;
   }
@@ -124,36 +137,29 @@ export const getServicesByAccountReducer = (state = { servicesByAccount: [] }, a
   }
 };
 
-// delete service
-// export const deleteServiceReducer = (state = { deletedService: [] }, action) => {
+// delete service reducer
+// export const deleteServiceReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case DELETE_SERVICE:
 //       return {
 //         ...state,
 //         loading: true,
+//         deletedService: action.payload,
 //       };
 //     case DELETE_SERVICE_SUCCESS:
+//       console.log("delete", initialState.deletedService);
 //       return {
 //         ...state,
 //         loading: false,
-//         deletedService: state.deletedService.filter((service) => service.id !== action.id),
+//         services: state.services.filter(service => service.id !== state.deletedService),
+//         deletedService: [],
 //       };
 //     case DELETE_SERVICE_FAIL:
 //       return {
 //         ...state,
 //         loading: false,
-//         error: action.error,
-//       };
-//     default:
-//       return state;
-//   }
-// };
-
-// export const deleteSuccess = (state = { deletedService: [] }, action) => {
-//   switch (action.type) {
-//     case DELETE_SERVICE_SUCCESS:
-//       const newState = state.deletedService.filter((service) => service.id !== action.id);
-//       return newState;
+//         error: action.payload,
+//       }
 //     default:
 //       return state;
 //   }

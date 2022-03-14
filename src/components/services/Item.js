@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button } from "react-bootstrap";
 
 import { getProfileByService } from "../../redux/action/Profile";
-import { deleteServiceRequest } from "../../redux/action/DeleteService";
 import { getServices } from "../../redux/action/Services";
+import { deleteItem, deleteService } from "../../redux/action/Services";
 
-const Item = ({ item, deleteItem }) => {
+const Item = ({ item }) => {
   const [show, setShow] = useState(false);
   const [currentItem, setCurrentItem] = useState(item);
   const handleClose = () => setShow(false);
@@ -34,9 +34,15 @@ const Item = ({ item, deleteItem }) => {
     handleShow();
   };
 
-  // const deleteItem = (e) => {
-  //   e.preventDefault();
-  //   dispatch(deleteServiceRequest(item.id));
+  const handleDeleteItem = () => {
+    console.log("hdki", currentItem);
+    console.log("hdk", item.id)
+    dispatch(deleteItem(item.id));
+    handleClose();
+  }
+
+  // const deleteService = () => {
+  //   dispatch(deleteItem(item.id));
   // }
 
   // console.log(currentItem);
@@ -86,7 +92,7 @@ const Item = ({ item, deleteItem }) => {
         <div className="item--contact__details">
           <p>Price: {item.price}</p>
           {providerId === currentUserId ? (
-            <button onClick={() => deleteItem(item.id)}>Delete</button>
+            <button onClick={handleDeleteItem}>Delete</button>
           ) : (
             <>
               <button>Request Service</button>

@@ -8,6 +8,8 @@ import {
   getSingleServiceFail,
   getServicesByAccountSuccess,
   getServicesByAccountFail,
+  deleteServiceSuccess,
+  deleteServiceFail,
 } from "../../action/Services";
 import { getServicesApi, getServicesBySubcategoryApi, getSingleServiceApi, getServicesByAccountApi, deleteServiceApi } from "../../../api/Services";
 
@@ -52,13 +54,14 @@ export function* getServicesByAccountSaga(action) {
   }
 };
 
-// export function* deleteServiceSaga(action) {
-//   try {
-//     const deletedService = yield call(deleteServiceApi, action.id);
-//     yield put(deleteServiceSuccess(deletedService));
-//   } catch (error) {
-//     yield put(deleteServiceFail(error));
-//   };  
-// };
+export function* deleteServiceSaga(action) {
+  const { id } = action.payload;
+  try {
+    yield call(deleteServiceApi, id);
+    yield put(deleteServiceSuccess());
+  } catch (error) {
+    yield put(deleteServiceFail(error));
+  };  
+};
 
 

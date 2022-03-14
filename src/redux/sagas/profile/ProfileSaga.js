@@ -18,4 +18,8 @@ export function* getProfileByServiceSaga(action) {
   } catch (error) {
     yield put(getProfileByServiceFail(error));
   }
+};
+
+export const editProfileSaga = (action) => {
+  console.log(action);
 }
